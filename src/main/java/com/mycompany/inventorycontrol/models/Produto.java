@@ -9,5 +9,4 @@ package com.mycompany.inventorycontrol.models;
  * @author yuri
  */
 public class Produto {
-    
 }
