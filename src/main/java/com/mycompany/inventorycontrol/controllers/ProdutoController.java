@@ -8,7 +8,6 @@ package com.mycompany.inventorycontrol.controllers;
  *
  * @author yuri
  */
-public class LoginController {
+public class ProdutoController {
     
 }
-
