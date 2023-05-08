@@ -19,9 +19,9 @@ public class InventoryControl {
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         // Adicionar um novo produto
-        Produto novoProduto = new Produto("Camisa", "desc", 50.0);
-        produtoDAO.adicionarProduto(novoProduto);
-        produtoDAO.fecharConexao();
+        //Produto novoProduto = new Produto("Camisa", "desc", 50.0);
+        //produtoDAO.adicionarProduto(novoProduto);
+        //produtoDAO.fecharConexao();
     }
 }
 
