@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.inventorycontrol.models;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author yuri
@@ -48,7 +51,7 @@ public class Produto {
     }
 
     public void setDescricao(String descricao) {
-        this.desc = descricao;
+        this.descricao = descricao;
     }
 
     public double getPreco() {
@@ -69,4 +72,5 @@ public class Produto {
   
 
   
+
 }
