@@ -6,6 +6,9 @@
 
 package com.mycompany.inventorycontrol;
 
+import com.mycompany.inventorycontrol.models.Produto;
+import com.mycompany.inventorycontrol.models.Produto.ProdutoDAO;
+
 /**
  *
  * @author yuri
@@ -13,7 +16,12 @@ package com.mycompany.inventorycontrol;
 public class InventoryControl {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        // Adicionar um novo produto
+        Produto novoProduto = new Produto("Camisa", "desc", 50.0);
+        produtoDAO.adicionarProduto(novoProduto);
+        produtoDAO.fecharConexao();
     }
 }
 

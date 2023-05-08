@@ -4,8 +4,8 @@
  */
 package com.mycompany.inventorycontrol.models;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
  *
@@ -20,7 +20,7 @@ public class Produto {
 
 
   //Constructor
-  public Produto(int id, String nome, String descricao, double preco, int qntEstoque) {
+  public Produto(String nome, String descricao, double preco) {
     this.id = id;
     this.nome = nome;
     this.descricao = descricao;
@@ -70,7 +70,60 @@ public class Produto {
         this.qntEstoque = qntEstoque;
     }
   
-
-  
-
+    //Connection on MySQL
+    
+public static class ProdutoDAO {
+    
+    private Connection conexao;
+    
+    public ProdutoDAO() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://172.17.0.2:3306/inventoryControl", "root", "123");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void adicionarProduto(Produto produto) {
+        try {
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO produto (nome,descricao,preco) VALUES (?, ?,?)");
+            stmt.setString(1, produto.getNome());
+            stmt.setString(2, produto.getDescricao());
+            stmt.setDouble(3, produto.getPreco());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void atualizarProduto(Produto produto) {
+        try {
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, descricao = ?, preco = ? WHERE id = ?");
+            stmt.setString(1, produto.getNome());
+            stmt.setString(2, produto.getDescricao());
+            stmt.setDouble(3, produto.getPreco());
+            stmt.setInt(4, produto.getId());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void fecharConexao() {
+        try {
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+} 
+        
+        
+    
+
+
+
+
