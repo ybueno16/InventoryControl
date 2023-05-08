@@ -11,16 +11,16 @@ package com.mycompany.inventorycontrol.models;
 public class Produto {
   private int id;
   private String nome;
-  private String desc;
+  private String descricao;
   private double preco;
   private int qntEstoque;
 
 
   //Constructor
-  public Produto(int id, String nome, String desc, double preco, int qntEstoque) {
+  public Produto(int id, String nome, String descricao, double preco, int qntEstoque) {
     this.id = id;
     this.nome = nome;
-    this.desc = desc;
+    this.descricao = descricao;
     this.preco = preco;
     this.qntEstoque = qntEstoque;
   }
@@ -43,12 +43,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescricao(String descricao) {
+        this.desc = descricao;
     }
 
     public double getPreco() {
