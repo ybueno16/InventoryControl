@@ -17,11 +17,6 @@ import com.mycompany.inventorycontrol.views.ProdutoView;
 public class InventoryControl {
 
     public static void main(String[] args) {
-        //ProdutoDAO produtoDAO = new ProdutoDAO();
-        // Adicionar um novo produto
-        //Produto novoProduto = new Produto("Camisa", "desc", 50.0);
-        //produtoDAO.adicionarProduto(novoProduto);
-        //produtoDAO.fecharConexao();
         ProdutoView produtoView = new ProdutoView();
     }
 }
