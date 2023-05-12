@@ -4,10 +4,32 @@
  */
 package com.mycompany.inventorycontrol.controllers;
 
+import com.mycompany.inventorycontrol.models.Produto;
+import com.mycompany.inventorycontrol.models.Produto.ProdutoDAO;
+import com.mycompany.inventorycontrol.views.ProdutoView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author yuri
  */
-public class ProdutoController {
-    
+
+
+public class ProdutoController implements ActionListener {
+
+
+    private ProdutoView view;
+    private ProdutoDAO dao;
+
+    public ProdutoController(){
+        this.view = view;
+        this.dao = new ProdutoDAO();
+        this.view.getButtonAdd().addActionListener(this);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }

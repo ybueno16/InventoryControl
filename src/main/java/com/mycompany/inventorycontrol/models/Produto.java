@@ -108,7 +108,7 @@ public static class ProdutoDAO {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erro ao adicionar produto: " + e.getMessage());
         }
     }
     public void fecharConexao() {

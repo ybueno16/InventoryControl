@@ -3,18 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.inventorycontrol.views;
-import com.mycompany.inventorycontrol.models.Produto;
-import com.mycompany.inventorycontrol.models.Produto.ProdutoDAO;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,18 +16,35 @@ import javax.swing.JTextField;
  *
  * @author yuri
  */
-public class ProdutoView implements ActionListener{
+public class ProdutoView {
     private JTextField textProduto;
     private JTextField textDescricao;
     private JTextField textPreco;
+    private JButton buttonAdd;
+
+    public JTextField getTextProduto() {
+        return textProduto;
+    }
+
+    public JTextField getTextDescricao() {
+        return textDescricao;
+    }
+
+    public JTextField getTextPreco() {
+        return textPreco;
+    }
+
+    public JButton getButtonAdd() {
+        return buttonAdd;
+    }
 
     public ProdutoView(){
         JFrame frame = new JFrame();
         JPanel panel = new JPanel();
         JButton button = new JButton("Adicionar Registro");
-        textProduto = new JTextField(20);
-        textDescricao = new JTextField(20);
-        textPreco = new JTextField(20);
+        JTextField produto = new JTextField(20);
+        JTextField descricao = new JTextField(20);
+        JTextField preco = new JTextField(20);
         JLabel produtoLabel = new JLabel("Produto:");
         JLabel descricaoLabel = new JLabel("Descrição:");
         JLabel precoLabel = new JLabel("Preço:");
@@ -45,11 +53,11 @@ public class ProdutoView implements ActionListener{
         panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel.setLayout(new GridLayout(0,2,5,5));
         panel.add(produtoLabel);
-        panel.add(textProduto);
+        panel.add(produto);
         panel.add(descricaoLabel);
-        panel.add(textDescricao);
+        panel.add(descricao);
         panel.add(precoLabel);
-        panel.add(textPreco);
+        panel.add(preco);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
         buttonPanel.add(new JLabel());
@@ -61,24 +69,18 @@ public class ProdutoView implements ActionListener{
         frame.setTitle("Produto");
         frame.pack();
         frame.setVisible(true);
-       
-        //Fazer operação de adição de registro no BD
-        button.addActionListener(this);
+     
+        
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Pegar os valores dos campos de texto
-        String nome = textProduto.getText();
-        String descricao = textDescricao.getText();
-        double preco = Double.parseDouble(textPreco.getText());
 
-        // Criar novo objeto Produto com os valores
-        Produto novoProduto = new Produto(nome, descricao, preco);
+  /*  public void clique() {
 
-        // Adicionar o novo produto no BD
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        produtoDAO.adicionarProduto(novoProduto);
-        produtoDAO.fecharConexao();
-    }
+        String nome = view.getTextProduto().getText();
+        String descricao = view.getTextDescricao().getText();
+        double preco = Double.parseDouble(view.getTextPreco().getText());
+
+        Produto produto = new Produto(ProdutoView.produto, descricao, preco)
+    }*/
 }
+
