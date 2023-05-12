@@ -6,8 +6,7 @@
 
 package com.mycompany.inventorycontrol;
 
-import com.mycompany.inventorycontrol.models.Produto;
-import com.mycompany.inventorycontrol.models.Produto.ProdutoDAO;
+import com.mycompany.inventorycontrol.controllers.ProdutoController;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 
 /**
@@ -17,7 +16,12 @@ import com.mycompany.inventorycontrol.views.ProdutoView;
 public class InventoryControl {
 
     public static void main(String[] args) {
-        ProdutoView produtoView = new ProdutoView();
+        ProdutoView view = new ProdutoView();
+        ProdutoController controller = new ProdutoController(view);
+        view.setVisible(true);
+
+
+
     }
 }
 

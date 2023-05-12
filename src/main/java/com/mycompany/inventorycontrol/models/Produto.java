@@ -13,15 +13,14 @@ import java.sql.SQLException;
  */
 public class Produto {
   private int id;
-  private String nome;
-  private String descricao;
-  private double preco;
-  private int qntEstoque;
+  private final String nome;
+  private final String descricao;
+  private final double preco;
+  private final int qntEstoque;
 
 
   //Constructor
-  public Produto(String nome, String descricao, double preco) {
-    this.id = id;
+  public Produto(String nome, String descricao, double preco, int qntEstoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
@@ -34,44 +33,25 @@ public class Produto {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public double getPreco() {
         return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public int getQntEstoque() {
         return qntEstoque;
     }
 
-    public void setQntEstoque(int qntEstoque) {
-        this.qntEstoque = qntEstoque;
-    }
-  
-    //Connection on MySQL
-    
+
+
+//Connection on MySQL
 public static class ProdutoDAO {
     
     private Connection conexao;
@@ -87,10 +67,11 @@ public static class ProdutoDAO {
     
     public void adicionarProduto(Produto produto) {
         try {
-            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO produto (nome,descricao,preco) VALUES (?, ?,?)");
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO produto (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPreco());
+            stmt.setInt(4,produto.getQntEstoque());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
@@ -100,11 +81,12 @@ public static class ProdutoDAO {
     
     public void atualizarProduto(Produto produto) {
         try {
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, descricao = ?, preco = ? WHERE id = ?");
+            PreparedStatement stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ?, WHERE id = ?");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPreco());
-            stmt.setInt(4, produto.getId());
+            stmt.setInt(4,produto.getQntEstoque());
+            stmt.setInt(5, produto.getId());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {

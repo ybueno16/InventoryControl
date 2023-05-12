@@ -17,19 +17,23 @@ import java.awt.event.ActionListener;
 
 public class ProdutoController implements ActionListener {
 
+    private final ProdutoView view;
+    private final ProdutoDAO dao;
 
-    private ProdutoView view;
-    private ProdutoDAO dao;
-
-    public ProdutoController(){
+    public ProdutoController(ProdutoView view) {
         this.view = view;
         this.dao = new ProdutoDAO();
         this.view.getButtonAdd().addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String nome = view.getTextProduto().getText();
+        String descricao = view.getTextDescricao().getText();
+        double preco = Double.parseDouble(view.getTextPreco().getText());
+        int qntEstoque = Integer.parseInt(view.getTextQntEstoque().getText());
+        Produto produto = new Produto(nome, descricao, preco, qntEstoque);
+        dao.adicionarProduto(produto);
+        dao.fecharConexao();
     }
 }
