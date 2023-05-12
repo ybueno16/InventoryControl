@@ -27,7 +27,7 @@ public class ProdutoView extends JFrame {
         constraints.anchor = GridBagConstraints.WEST;
         constraints.insets = new Insets(20, 10, 10, 20);
 
-        JLabel labelProduto = new JLabel("Nome do Produto:");
+        JLabel labelProduto = new JLabel("Nome do ProdutoModel:");
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.EAST;

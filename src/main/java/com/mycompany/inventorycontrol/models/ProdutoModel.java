@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  * @author yuri
  */
-public class Produto {
+public class ProdutoModel {
   private int id;
   private final String nome;
   private final String descricao;
@@ -20,7 +20,7 @@ public class Produto {
 
 
   //Constructor
-  public Produto(String nome, String descricao, double preco, int qntEstoque) {
+  public ProdutoModel(String nome, String descricao, double preco, int qntEstoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
@@ -61,46 +61,31 @@ public static class ProdutoDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conexao = DriverManager.getConnection("jdbc:mysql://172.17.0.2:3306/inventoryControl", "root", "123");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erro ao tentar conectar-se ao banco de dados " + e.getMessage());
         }
     }
     
-    public void adicionarProduto(Produto produto) {
+    public void adicionarProduto(ProdutoModel produtoModel) {
         try {
-            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO produto (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)");
-            stmt.setString(1, produto.getNome());
-            stmt.setString(2, produto.getDescricao());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setInt(4,produto.getQntEstoque());
+            PreparedStatement stmt = conexao.prepareStatement("INSERT INTO produtoModel (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)");
+            stmt.setString(1, produtoModel.getNome());
+            stmt.setString(2, produtoModel.getDescricao());
+            stmt.setDouble(3, produtoModel.getPreco());
+            stmt.setInt(4, produtoModel.getQntEstoque());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void atualizarProduto(Produto produto) {
-        try {
-            PreparedStatement stmt = conexao.prepareStatement("UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ?, WHERE id = ?");
-            stmt.setString(1, produto.getNome());
-            stmt.setString(2, produto.getDescricao());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setInt(4,produto.getQntEstoque());
-            stmt.setInt(5, produto.getId());
-            stmt.executeUpdate();
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println("Erro ao adicionar produto: " + e.getMessage());
+            System.out.println("Erro ao adicionar produtoModel " + e.getMessage());
         }
     }
     public void fecharConexao() {
         try {
             conexao.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erro ao fechar a conexão " + e.getMessage());
         }
     }
-}
+  }
 } 
         
         

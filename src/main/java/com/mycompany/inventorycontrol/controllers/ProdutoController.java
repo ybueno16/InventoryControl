@@ -4,8 +4,8 @@
  */
 package com.mycompany.inventorycontrol.controllers;
 
-import com.mycompany.inventorycontrol.models.Produto;
-import com.mycompany.inventorycontrol.models.Produto.ProdutoDAO;
+import com.mycompany.inventorycontrol.models.ProdutoModel;
+import com.mycompany.inventorycontrol.models.ProdutoModel.ProdutoDAO;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,8 +32,8 @@ public class ProdutoController implements ActionListener {
         String descricao = view.getTextDescricao().getText();
         double preco = Double.parseDouble(view.getTextPreco().getText());
         int qntEstoque = Integer.parseInt(view.getTextQntEstoque().getText());
-        Produto produto = new Produto(nome, descricao, preco, qntEstoque);
-        dao.adicionarProduto(produto);
+        ProdutoModel produtoModel = new ProdutoModel(nome, descricao, preco, qntEstoque);
+        dao.adicionarProduto(produtoModel);
         dao.fecharConexao();
     }
 }

@@ -18,10 +18,6 @@ public class InventoryControl {
     public static void main(String[] args) {
         ProdutoView view = new ProdutoView();
         ProdutoController controller = new ProdutoController(view);
-        view.setVisible(true);
-
-
-
     }
 }
 
