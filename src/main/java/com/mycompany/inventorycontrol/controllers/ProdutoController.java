@@ -4,8 +4,8 @@
  */
 package com.mycompany.inventorycontrol.controllers;
 
-import com.mycompany.inventorycontrol.models.ProdutoModel;
-import com.mycompany.inventorycontrol.models.ProdutoModel.ProdutoDAO;
+import com.mycompany.inventorycontrol.models.Produto;
+import com.mycompany.inventorycontrol.models.Produto.conexaoDAO;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +18,11 @@ import java.awt.event.ActionListener;
 public class ProdutoController implements ActionListener {
 
     private final ProdutoView view;
-    private final ProdutoDAO dao;
+    private final conexaoDAO dao;
 
     public ProdutoController(ProdutoView view) {
         this.view = view;
-        this.dao = new ProdutoDAO();
+        this.dao = new conexaoDAO();
         this.view.getButtonAdd().addActionListener(this);
     }
 
@@ -32,8 +32,8 @@ public class ProdutoController implements ActionListener {
         String descricao = view.getTextDescricao().getText();
         double preco = Double.parseDouble(view.getTextPreco().getText());
         int qntEstoque = Integer.parseInt(view.getTextQntEstoque().getText());
-        ProdutoModel produtoModel = new ProdutoModel(nome, descricao, preco, qntEstoque);
-        dao.adicionarProduto(produtoModel);
+        Produto produto = new Produto(nome, descricao, preco, qntEstoque);
+        dao.adicionarProduto(produto);
         dao.fecharConexao();
     }
 }

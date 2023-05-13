@@ -1,11 +1,13 @@
 package com.mycompany.inventorycontrol.views;
 
-import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class ProdutoView extends JFrame {
     private final JTextField textProduto;
@@ -27,7 +29,7 @@ public class ProdutoView extends JFrame {
         constraints.anchor = GridBagConstraints.WEST;
         constraints.insets = new Insets(20, 10, 10, 20);
 
-        JLabel labelProduto = new JLabel("Nome do ProdutoModel:");
+        JLabel labelProduto = new JLabel("Nome do Produto:");
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.EAST;
