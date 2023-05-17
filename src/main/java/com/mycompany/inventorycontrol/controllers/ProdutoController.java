@@ -35,5 +35,7 @@ public class ProdutoController implements ActionListener {
         Produto produto = new Produto(nome, descricao, preco, qntEstoque);
         dao.adicionarProduto(produto);
         dao.fecharConexao();
+        //Limpa os campos após adicionar o produto
+        view.limparCampos();
     }
 }

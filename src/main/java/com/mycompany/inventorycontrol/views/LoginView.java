@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -73,6 +74,10 @@ public class LoginView extends JFrame {
         setSize(300, 150);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void exibirMensagemErro() {
+        JOptionPane.showMessageDialog(this, "Usuário ou senha incorretos", "Erro de Login", JOptionPane.ERROR_MESSAGE);
     }
 
     public JTextField getCampoUsuario() {

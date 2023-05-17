@@ -85,6 +85,7 @@ public class ProdutoView extends JFrame {
 
     }
 
+
     public JTextField getTextProduto() {
         return textProduto;
     }
@@ -103,5 +104,11 @@ public class ProdutoView extends JFrame {
 
     public JTextField getTextQntEstoque() {
         return textQntEstoque;
+    }
+    public void limparCampos() {
+        getTextProduto().setText("");
+        getTextDescricao().setText("");
+        getTextPreco().setText("");
+        getTextQntEstoque().setText("");
     }
 }
