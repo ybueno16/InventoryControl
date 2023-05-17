@@ -2,49 +2,41 @@ package com.mycompany.inventorycontrol.models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mycompany.inventorycontrol.models.Produto.conexaoDAO;
-
 public class Login {
-    private final int id;
-    private final String usuario;
-    private final String senha;
+    private static String usuario;
+    private static String senha;
 
-    public Login(int id, String usuario, String senha, Produto.conexaoDAO dao) {
-        this.id = id;
-        this.usuario = usuario;
-        this.senha = senha;
-
+    public Login(String usuario, String senha) {
+        Login.usuario = usuario;
+        Login.senha = senha;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public String getUsuario() {
+    public static String getUsuario() {
         return usuario;
     }
 
-    public String getSenha() {
+    public static String getSenha() {
         return senha;
     }
 
-    public void validarLogin(Login login) throws SQLException {
-        Connection conexao = null;
-        try {
-            // realiza a conexão e as operações desejadas no banco de dados
-            conexao = conexaoDAO.getInstancia().getConexao();
-            String query = "SELECT * from usuario where nome = ? and senha = ? ";
-            PreparedStatement stmt = conexao.prepareStatement(query);
-            stmt.setString(1, getUsuario());
-            stmt.setString(2,getSenha());
-        } catch (SQLException e) {
-            System.out.println("Erro ao validar senha" + e.getMessage());
-        } finally {
-            // fecha a conexão com o banco de dados
-            if (conexao != null) {
-                conexao.close();
+
+    public static class ValidarLogin {
+        public boolean validarLogin(Login login) {
+            try {
+                Connection conexao = Produto.conexaoDAO.getInstancia().getConexao();
+                String query = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
+                PreparedStatement stmt = conexao.prepareStatement(query);
+                stmt.setString(1, getUsuario());
+                stmt.setString(2, getSenha());
+                ResultSet rs = stmt.executeQuery();
+                return rs.next();
+            } catch (SQLException e) {
+                System.out.println("Erro ao validar senha: " + e.getMessage());
+                return false;
             }
         }
     }

@@ -74,4 +74,16 @@ public class LoginView extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    public JTextField getCampoUsuario() {
+        return campoUsuario;
+    }
+
+    public JPasswordField getCampoSenha() {
+        return campoSenha;
+    }
+
+    public JButton getBotaoEntrar() {
+        return botaoEntrar;
+    }
 }
