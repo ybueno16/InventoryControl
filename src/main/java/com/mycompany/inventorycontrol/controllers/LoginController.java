@@ -16,6 +16,7 @@ import com.mycompany.inventorycontrol.views.ProdutoView;
  *
  * @author yuri
  */
+@SuppressWarnings("InstantiationOfUtilityClass")
 public class LoginController implements ActionListener {
     private final LoginView view;
     private final ValidarLogin vLogin;
@@ -26,6 +27,7 @@ public class LoginController implements ActionListener {
         this.view.getBotaoEntrar().addActionListener(this);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void actionPerformed(ActionEvent e) {
         String usuario = view.getCampoUsuario().getText();
