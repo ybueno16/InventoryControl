@@ -17,10 +17,10 @@ import java.awt.event.ActionListener;
 
 public class ProdutoController implements ActionListener {
 
-    private final ProdutoView view;
+    private ProdutoView view;
     private final conexaoDAO dao;
 
-    public ProdutoController(ProdutoView view) {
+    public ProdutoController() {
         this.view = view;
         this.dao = new conexaoDAO();
         this.view.getButtonAdd().addActionListener(this);

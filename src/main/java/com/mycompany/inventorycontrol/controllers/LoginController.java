@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import com.mycompany.inventorycontrol.views.LoginView;
 import com.mycompany.inventorycontrol.models.Login;
 import com.mycompany.inventorycontrol.models.Login.ValidarLogin;
+import com.mycompany.inventorycontrol.views.ProdutoShowView;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 
 
@@ -35,8 +36,8 @@ public class LoginController implements ActionListener {
         if (vLogin.validarLogin(login)) {
             // Login válido, fazer algo aqui, por exemplo, exibir uma mensagem de sucesso ou redirecionar para outra tela
             System.out.println("Login válido");
-            ProdutoView Pview = new ProdutoView();
-            ProdutoController controller = new ProdutoController(Pview);
+            ProdutoShowView PSview = new ProdutoShowView();
+            PSview.setVisible(true);
             view.dispose();
         } else {
             // Login inválido, fazer algo aqui, por exemplo, exibir uma mensagem de erro

@@ -1,5 +1,9 @@
 package com.mycompany.inventorycontrol.views;
 
+import com.mycompany.inventorycontrol.controllers.ProdutoController;
+import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
+
+
 import javax.swing.JTable;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,17 +14,20 @@ import javax.swing.JComboBox;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ProdutoShowView extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField searchField;
     private JComboBox<String> filterComboBox;
+    private ProdutoShowController PScontroller;
 
     public ProdutoShowView() {
+
         initComponents();
+        PScontroller = new ProdutoShowController(this);
+        PScontroller.carregarProdutos();
     }
 
     private void initComponents() {
@@ -62,5 +69,9 @@ public class ProdutoShowView extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
     }
 }

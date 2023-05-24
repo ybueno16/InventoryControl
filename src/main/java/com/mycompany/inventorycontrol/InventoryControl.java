@@ -17,8 +17,6 @@ import com.mycompany.inventorycontrol.views.LoginView;
 public class InventoryControl {
 
     public static void main(String[] args) {
-        /*ProdutoShowView PSview = new ProdutoShowView();
-        PSview.setVisible(true); <- Remover Comentário para testar listagem de produto*/
         LoginView Lview = new LoginView();
         LoginController Lcontroller = new LoginController(Lview);
 
