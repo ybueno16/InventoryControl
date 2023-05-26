@@ -7,7 +7,6 @@
 package com.mycompany.inventorycontrol;
 
 import com.mycompany.inventorycontrol.controllers.LoginController;
-import com.mycompany.inventorycontrol.views.ProdutoShowView;
 import com.mycompany.inventorycontrol.views.LoginView;
 
 /**

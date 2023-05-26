@@ -105,6 +105,7 @@ public class ProdutoView extends JFrame {
     public JTextField getTextQntEstoque() {
         return textQntEstoque;
     }
+    
     public void limparCampos() {
         getTextProduto().setText("");
         getTextDescricao().setText("");

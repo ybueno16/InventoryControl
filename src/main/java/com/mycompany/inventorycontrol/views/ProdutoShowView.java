@@ -15,6 +15,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.util.List;
+import javax.swing.JButton;
 
 public class ProdutoShowView extends JFrame {
     private JTable table;
@@ -22,6 +23,7 @@ public class ProdutoShowView extends JFrame {
     private JTextField searchField;
     private JComboBox<String> filterComboBox;
     private ProdutoShowController PScontroller;
+    private JButton addProdutoButton;
 
     public ProdutoShowView() {
 
@@ -67,11 +69,19 @@ public class ProdutoShowView extends JFrame {
         topPanel.add(new JLabel("Filtrar por:"));
         topPanel.add(filterComboBox);
 
+        // Botão para realizar adição de produto
+        addProdutoButton = new JButton("Adicionar Produto");
+        topPanel.add(addProdutoButton);
+
         pack();
         setLocationRelativeTo(null);
     }
 
     public DefaultTableModel getTableModel() {
         return tableModel;
+    }
+
+    public JButton getAddProdutoButton(){
+        return addProdutoButton;
     }
 }
