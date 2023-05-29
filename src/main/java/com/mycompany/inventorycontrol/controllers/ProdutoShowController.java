@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
+
 public class ProdutoShowController {
     private ProdutoShowView PSview;
 
@@ -22,7 +24,7 @@ public class ProdutoShowController {
     }
 
     public void carregarProdutos() {
-        List<ProdutoShow> produtos = ProdutoShow.getProdutos();
+        List<ProdutoShow> produtos = getProdutos();
         for (ProdutoShow produto : produtos) {
             adicionarProdutoTabela(produto);
         }
@@ -46,21 +48,12 @@ public class ProdutoShowController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica para adicionar o produto e atualizar a tabela do ProdutoShow
-                ProdutoShow novoProduto = criarProdutoShow(Pview);
-                adicionarProdutoTabela(novoProduto);
+                ProdutoView Pview = new ProdutoView();
+                ProdutoController Pcontroller = new ProdutoController(Pview);
                 Pview.dispose();
             }
         });
 
         Pview.setVisible(true);
-    }
-
-    private ProdutoShow criarProdutoShow(ProdutoView produtoView) {
-        // Obter os dados do produto a partir da tela ProdutoView e criar um objeto ProdutoShow correspondente
-        String nome = produtoView.getTextProduto().getText();
-        String descricao = produtoView.getTextDescricao().getText();
-        double preco = Double.parseDouble(produtoView.getTextPreco().getText());
-        int qntEstoque = Integer.parseInt(produtoView.getTextQntEstoque().getText());
-        return new ProdutoShow(nome, descricao, preco, qntEstoque);
     }
 }

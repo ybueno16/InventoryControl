@@ -14,7 +14,8 @@ public class ProdutoShow {
     private double preco;
     private int qntEstoque;
 
-    public ProdutoShow(String nome, String descricao, double preco, int qntEstoque) {
+    public ProdutoShow(int id, String nome, String descricao, double preco, int qntEstoque) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -35,7 +36,7 @@ public class ProdutoShow {
                 String desc = resultSet.getString("descricao");
                 double preco = resultSet.getDouble("preco");
                 int qntEstoque = resultSet.getInt("qntEstoque");
-                ProdutoShow produto = new ProdutoShow(id, nome, desc, preco, qntEstoque);
+                ProdutoShow produto = new ProdutoShow(id,nome, desc, preco, qntEstoque);
                 produtos.add(produto);
             }
             resultSet.close();

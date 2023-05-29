@@ -21,7 +21,7 @@ public class ProdutoController implements ActionListener {
     private final conexaoDAO dao;
 
     public ProdutoController(ProdutoView pview) {
-        this.view = view;
+        this.view = pview;
         this.dao = new conexaoDAO();
         this.view.getButtonAdd().addActionListener(this);
     }
