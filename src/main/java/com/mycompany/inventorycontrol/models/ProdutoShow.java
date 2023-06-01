@@ -39,9 +39,6 @@ public class ProdutoShow {
                 ProdutoShow produto = new ProdutoShow(id,nome, desc, preco, qntEstoque);
                 produtos.add(produto);
             }
-            resultSet.close();
-            statement.close();
-            conexao.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,4 +64,5 @@ public class ProdutoShow {
     public int getqntEstoque() {
         return qntEstoque;
     }
+    
 }

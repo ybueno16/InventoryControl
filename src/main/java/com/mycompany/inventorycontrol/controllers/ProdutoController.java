@@ -1,28 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.inventorycontrol.controllers;
 
 import com.mycompany.inventorycontrol.models.Produto;
 import com.mycompany.inventorycontrol.models.Produto.conexaoDAO;
 import com.mycompany.inventorycontrol.views.ProdutoView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-/**
- *
- * @author yuri
- */
-
 
 public class ProdutoController implements ActionListener {
 
     private ProdutoView view;
-    private final conexaoDAO dao;
+    private conexaoDAO dao;
+    private ProdutoShowController PScontroller;
 
-    public ProdutoController(ProdutoView pview) {
+    public ProdutoController(ProdutoView pview, ProdutoShowController PScontroller) {
         this.view = pview;
         this.dao = new conexaoDAO();
+        this.PScontroller = PScontroller;
         this.view.getButtonAdd().addActionListener(this);
     }
 
@@ -33,9 +27,15 @@ public class ProdutoController implements ActionListener {
         double preco = Double.parseDouble(view.getTextPreco().getText());
         int qntEstoque = Integer.parseInt(view.getTextQntEstoque().getText());
         Produto produto = new Produto(nome, descricao, preco, qntEstoque);
-        dao.adicionarProduto(produto);
+        adicionarProduto(produto);
+        PScontroller.limparTabela();
+        PScontroller.carregarProdutos();
         dao.fecharConexao();
-        //Limpa os campos após adicionar o produto
         view.limparCampos();
+        view.dispose();
+    }
+
+    public void adicionarProduto(Produto produto) {
+        dao.adicionarProduto(produto);
     }
 }
