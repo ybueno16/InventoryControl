@@ -24,6 +24,7 @@ public class ProdutoShowView extends JFrame {
     private JComboBox<String> filterComboBox;
     private ProdutoShowController PScontroller;
     private JButton addProdutoButton;
+    private JButton searchFieldButton;
 
     public ProdutoShowView() {
 
@@ -62,12 +63,8 @@ public class ProdutoShowView extends JFrame {
         topPanel.add(searchField);
 
         // Filtro
-        filterComboBox = new JComboBox<>();
-        filterComboBox.addItem("Todos");
-        filterComboBox.addItem("Nome");
-        filterComboBox.addItem("Descrição");
-        topPanel.add(new JLabel("Filtrar por:"));
-        topPanel.add(filterComboBox);
+        searchFieldButton = new JButton("Pesquisar");
+        topPanel.add(searchFieldButton);
 
         // Botão para realizar adição de produto
         addProdutoButton = new JButton("Adicionar Produto");
