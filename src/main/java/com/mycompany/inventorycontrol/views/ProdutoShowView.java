@@ -21,7 +21,6 @@ public class ProdutoShowView extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField searchField;
-    private JComboBox<String> filterComboBox;
     private ProdutoShowController PScontroller;
     private JButton addProdutoButton;
     private JButton searchFieldButton;
