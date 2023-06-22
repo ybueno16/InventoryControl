@@ -25,6 +25,17 @@ public class ProdutoShowController {
           }
         }
       );
+
+    PSview
+      .getUserConfig()
+      .addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent event) {
+            System.out.println("Menu clicado"); // Instanciar tela usuario
+          }
+        }
+      );
   }
 
   public void carregarProdutos() {

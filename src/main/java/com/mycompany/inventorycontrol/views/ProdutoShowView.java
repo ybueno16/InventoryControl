@@ -24,6 +24,9 @@ public class ProdutoShowView extends JFrame {
   private JButton addProdutoButton;
   private JButton searchFieldButton;
 
+  private JMenu configMenu;
+  private JMenuItem userConfig;
+
   public ProdutoShowView() {
     initComponents();
     PScontroller = new ProdutoShowController(this);
@@ -61,6 +64,14 @@ public class ProdutoShowView extends JFrame {
 
     topPanel.add(addProdutoButton);
     setLocationRelativeTo(null);
+
+    JMenuBar menuBar = new JMenuBar();
+    configMenu = new JMenu("Configurações");
+    userConfig = new JMenuItem("Criar/Alterar Usuário");
+    configMenu.add(userConfig);
+    menuBar.add(configMenu);
+    this.setJMenuBar(menuBar);
+    this.setVisible(true);
   }
 
   public DefaultTableModel getTableModel() {
@@ -69,5 +80,13 @@ public class ProdutoShowView extends JFrame {
 
   public JButton getAddProdutoButton() {
     return addProdutoButton;
+  }
+
+  public JMenu getConfigMenu() {
+    return configMenu;
+  }
+
+  public JMenuItem getUserConfig() {
+    return userConfig;
   }
 }
