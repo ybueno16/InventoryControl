@@ -1,5 +1,6 @@
 package com.mycompany.inventorycontrol.models;
 
+import com.mycompany.inventorycontrol.views.ProdutoShowView;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -43,6 +44,29 @@ public class ProdutoShow {
             e.printStackTrace();
         }
         return produtos;
+    }
+
+    public List<ProdutoShow> getPesquisaProduto(){
+        
+        List<ProdutoShow> pesquisaProduto = new ArrayList<>();
+        try{
+            Connection conexao =  Produto.conexaoDAO.getInstancia().getConexao();
+            Statement statement = conexao.createStatement();
+            String query = "SELECT nome FROM produto WHERE nome LIKE '%'" +  getNome() + "'%";
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String desc = resultSet.getString("descricao");
+                double preco = resultSet.getDouble("preco");
+                int qntEstoque = resultSet.getInt("qntEstoque");
+                ProdutoShow produto = new ProdutoShow(id,nome, desc, preco, qntEstoque);    
+                pesquisaProduto.add(produto);           
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pesquisaProduto;
     }
 
     public int getId() {

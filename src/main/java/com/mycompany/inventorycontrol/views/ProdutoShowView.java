@@ -1,6 +1,8 @@
 package com.mycompany.inventorycontrol.views;
 
 import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
+import com.mycompany.inventorycontrol.models.ProdutoShow;
+
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +25,6 @@ public class ProdutoShowView extends JFrame {
   private ProdutoShowController PScontroller;
   private JButton addProdutoButton;
   private JButton searchFieldButton;
-
   private JMenu configMenu;
   private JMenuItem userConfig;
 
@@ -76,6 +77,10 @@ public class ProdutoShowView extends JFrame {
 
   public DefaultTableModel getTableModel() {
     return tableModel;
+  }
+
+  public JButton getSearchFieldButton() {
+    return searchFieldButton;
   }
 
   public JButton getAddProdutoButton() {

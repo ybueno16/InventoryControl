@@ -12,7 +12,6 @@ import java.util.List;
 public class ProdutoShowController {
 
   private ProdutoShowView PSview;
-
   public ProdutoShowController(ProdutoShowView PSview) {
     this.PSview = PSview;
     PSview
@@ -25,6 +24,15 @@ public class ProdutoShowController {
           }
         }
       );
+
+    PSview.getSearchFieldButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        procuraProduto();
+        System.out.println("Pesquisado");
+      }
+    });
+
 
     PSview
       .getUserConfig()
@@ -66,4 +74,8 @@ public class ProdutoShowController {
     ProdutoController Pcontroller = new ProdutoController(Pview, this);
     Pview.setVisible(true);
   }
+
+  public void procuraProduto(){
+    limparTabela();
+  }  
 }
