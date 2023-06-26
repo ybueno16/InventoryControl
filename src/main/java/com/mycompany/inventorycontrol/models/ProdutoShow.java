@@ -81,6 +81,9 @@ public class ProdutoShow {
           qntEstoque
         );
         produtos.add(produto);
+        conexao.close();
+        statement.close();
+        resultSet.close();
       }
     } catch (SQLException e) {
       e.printStackTrace();

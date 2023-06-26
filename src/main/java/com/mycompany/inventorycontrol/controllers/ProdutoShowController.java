@@ -7,9 +7,9 @@ import com.mycompany.inventorycontrol.views.ProdutoShowView;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class ProdutoShowController {
 
@@ -35,7 +35,6 @@ public class ProdutoShowController {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            
             pesquisaProduto();
           }
         }
@@ -60,7 +59,7 @@ public class ProdutoShowController {
             if (keyCode == KeyEvent.VK_ENTER) {
               System.out.println("Tecla pressionada");
               pesquisaProduto();
-            } else{
+            } else {
               // Nada acontece se outra tecla for pressionada
             }
           }
