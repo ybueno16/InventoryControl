@@ -1,10 +1,10 @@
 package com.mycompany.inventorycontrol.models;
 
-import com.mycompany.inventorycontrol.views.ProdutoShowView;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,28 +46,31 @@ public class ProdutoShow {
         return produtos;
     }
 
-    public List<ProdutoShow> getPesquisaProduto(){
-        
-        List<ProdutoShow> pesquisaProduto = new ArrayList<>();
+    public static List<ProdutoShow> PesquisaProduto(String termoPesquisa){
+        List<ProdutoShow> produtos = new ArrayList<>();
         try{
-            Connection conexao =  Produto.conexaoDAO.getInstancia().getConexao();
-            Statement statement = conexao.createStatement();
-            String query = "SELECT nome FROM produto WHERE nome LIKE '%'" +  getNome() + "'%";
-            ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
+            Connection conexao = Produto.conexaoDAO.getInstancia().getConexao();
+            String query = "SELECT * FROM produto WHERE nome LIKE ?";
+            PreparedStatement statement = conexao.prepareStatement(query);
+            statement.setString(1, "%" + termoPesquisa + "%");
+            ResultSet resultSet = statement.executeQuery();  
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String desc = resultSet.getString("descricao");
                 double preco = resultSet.getDouble("preco");
                 int qntEstoque = resultSet.getInt("qntEstoque");
-                ProdutoShow produto = new ProdutoShow(id,nome, desc, preco, qntEstoque);    
-                pesquisaProduto.add(produto);           
+                ProdutoShow produto = new ProdutoShow(id,nome, desc, preco, qntEstoque);
+                produtos.add(produto);
             }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return pesquisaProduto;
+        } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return produtos;
+}
+
+
+        
 
     public int getId() {
         return id;
@@ -88,5 +91,6 @@ public class ProdutoShow {
     public int getqntEstoque() {
         return qntEstoque;
     }
+
     
 }

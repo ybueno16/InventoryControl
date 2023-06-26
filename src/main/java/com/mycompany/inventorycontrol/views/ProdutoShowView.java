@@ -83,6 +83,10 @@ public class ProdutoShowView extends JFrame {
     return searchFieldButton;
   }
 
+  public JTextField getSearchField() {
+    return searchField;
+  }
+
   public JButton getAddProdutoButton() {
     return addProdutoButton;
   }
