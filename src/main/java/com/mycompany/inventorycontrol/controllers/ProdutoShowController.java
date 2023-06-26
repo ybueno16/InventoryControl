@@ -8,6 +8,8 @@ import com.mycompany.inventorycontrol.views.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ProdutoShowController {
 
@@ -15,6 +17,7 @@ public class ProdutoShowController {
 
   public ProdutoShowController(ProdutoShowView PSview) {
     this.PSview = PSview;
+
     PSview
       .getAddProdutoButton()
       .addActionListener(
@@ -32,14 +35,10 @@ public class ProdutoShowController {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            limparTabela();
-            String searchField = PSview.getSearchField().getText();
-            List<ProdutoShow> produtos = ProdutoShow.PesquisaProduto(searchField);
-            for (ProdutoShow produto : produtos) {
-              adicionarProdutoTabela(produto);
+            
+            pesquisaProduto();
           }
         }
-      }
       );
 
     PSview
@@ -49,6 +48,21 @@ public class ProdutoShowController {
           @Override
           public void actionPerformed(ActionEvent event) {
             System.out.println("Menu clicado"); // Instanciar tela usuario
+          }
+        }
+      );
+
+    this.PSview.getSearchField()
+      .addKeyListener(
+        new KeyAdapter() {
+          public void keyPressed(KeyEvent e) {
+            int keyCode = e.getKeyCode();
+            if (keyCode == KeyEvent.VK_ENTER) {
+              System.out.println("Tecla pressionada");
+              pesquisaProduto();
+            } else{
+              // Nada acontece se outra tecla for pressionada
+            }
           }
         }
       );
@@ -83,4 +97,12 @@ public class ProdutoShowController {
     Pview.setVisible(true);
   }
 
+  public void pesquisaProduto() {
+    limparTabela();
+    String searchField = PSview.getSearchField().getText();
+    List<ProdutoShow> produtos = ProdutoShow.PesquisaProduto(searchField);
+    for (ProdutoShow produto : produtos) {
+      adicionarProdutoTabela(produto);
+    }
+  }
 }
