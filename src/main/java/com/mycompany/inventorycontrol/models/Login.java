@@ -27,7 +27,7 @@ public class Login {
 
     public boolean validarLogin(Login login) {
       try {
-        Connection conexao = Produto.conexaoDAO.getInstancia().getConexao();
+        Connection conexao = produtoAdd.conexaoDAO.getInstancia().getConexao();
         String query = "SELECT * FROM usuario WHERE nome = ? AND senha = ?";
         PreparedStatement stmt = conexao.prepareStatement(query);
         stmt.setString(1, getUsuario());

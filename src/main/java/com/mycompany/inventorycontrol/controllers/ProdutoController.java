@@ -1,7 +1,7 @@
 package com.mycompany.inventorycontrol.controllers;
 
-import com.mycompany.inventorycontrol.models.Produto;
-import com.mycompany.inventorycontrol.models.Produto.conexaoDAO;
+import com.mycompany.inventorycontrol.models.produtoAdd;
+import com.mycompany.inventorycontrol.models.produtoAdd.conexaoDAO;
 import com.mycompany.inventorycontrol.views.ProdutoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,15 +10,15 @@ public class ProdutoController implements ActionListener {
 
   private ProdutoView view;
   private conexaoDAO dao;
-  private ProdutoShowController PScontroller;
+  private ProdutoShowController ProdutoShowController;
 
   public ProdutoController(
     ProdutoView pview,
-    ProdutoShowController PScontroller
+    ProdutoShowController produtoShowController
   ) {
     this.view = pview;
     this.dao = new conexaoDAO();
-    this.PScontroller = PScontroller;
+    this.ProdutoShowController = produtoShowController;
     this.view.getButtonAdd().addActionListener(this);
   }
 
@@ -28,16 +28,16 @@ public class ProdutoController implements ActionListener {
     String descricao = view.getTextDescricao().getText();
     double preco = Double.parseDouble(view.getTextPreco().getText());
     int qntEstoque = Integer.parseInt(view.getTextQntEstoque().getText());
-    Produto produto = new Produto(nome, descricao, preco, qntEstoque);
+    produtoAdd produto = new produtoAdd(nome, descricao, preco, qntEstoque);
     adicionarProduto(produto);
-    PScontroller.limparTabela();
-    PScontroller.carregarProdutos();
+    ProdutoShowController.limparTabela();
+    ProdutoShowController.carregarProdutos();
     dao.fecharConexao();
     view.limparCampos();
     view.dispose();
   }
 
-  public void adicionarProduto(Produto produto) {
+  public void adicionarProduto(produtoAdd produto) {
     dao.adicionarProduto(produto);
   }
 }

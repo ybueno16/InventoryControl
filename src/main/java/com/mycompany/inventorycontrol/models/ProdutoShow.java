@@ -34,7 +34,7 @@ public class ProdutoShow {
   public static List<ProdutoShow> getProdutos() {
     List<ProdutoShow> produtos = new ArrayList<>();
     try {
-      Connection conexao = Produto.conexaoDAO.getInstancia().getConexao();
+      Connection conexao = produtoAdd.conexaoDAO.getInstancia().getConexao();
       Statement statement = conexao.createStatement();
       String query = "SELECT * FROM produto";
       ResultSet resultSet = statement.executeQuery(query);
@@ -62,7 +62,7 @@ public class ProdutoShow {
   public static List<ProdutoShow> PesquisaProduto(String termoPesquisa) {
     List<ProdutoShow> produtos = new ArrayList<>();
     try {
-      Connection conexao = Produto.conexaoDAO.getInstancia().getConexao();
+      Connection conexao = produtoAdd.conexaoDAO.getInstancia().getConexao();
       String query = "SELECT * FROM produto WHERE nome LIKE ?";
       PreparedStatement statement = conexao.prepareStatement(query);
       statement.setString(1, "%" + termoPesquisa + "%");
@@ -81,9 +81,6 @@ public class ProdutoShow {
           qntEstoque
         );
         produtos.add(produto);
-        conexao.close();
-        statement.close();
-        resultSet.close();
       }
     } catch (SQLException e) {
       e.printStackTrace();

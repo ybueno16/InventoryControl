@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author yuri
  */
-public class Produto {
+public class produtoAdd {
 
   private int id;
   private final String nome;
@@ -23,7 +23,7 @@ public class Produto {
   private static conexaoDAO instancia;
 
   //Constructor
-  public Produto(String nome, String descricao, double preco, int qntEstoque) {
+  public produtoAdd(String nome, String descricao, double preco, int qntEstoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
@@ -84,7 +84,7 @@ public class Produto {
       return conexao;
     }
 
-    public void adicionarProduto(Produto produto) {
+    public void adicionarProduto(produtoAdd produto) {
       try {
         PreparedStatement stmt = conexao.prepareStatement(
           "INSERT INTO produto (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)"

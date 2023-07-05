@@ -21,11 +21,11 @@ import java.awt.event.KeyEvent;
 public class LoginController implements ActionListener {
 
   private final LoginView view;
-  private final ValidarLogin vLogin;
+  private final ValidarLogin validaLogin;
 
   public LoginController(LoginView view) {
     this.view = view;
-    this.vLogin = new ValidarLogin();
+    this.validaLogin = new ValidarLogin();
     this.view.getCampoSenha()
       .addKeyListener(
         new KeyAdapter() {
@@ -53,7 +53,7 @@ public class LoginController implements ActionListener {
     String senha = view.getCampoSenha().getText();
     Login login = new Login(usuario, senha);
 
-    if (vLogin.validarLogin(login)) {
+    if (validaLogin.validarLogin(login)) {
       // Login válido, fazer algo aqui, por exemplo, exibir uma mensagem de sucesso ou redirecionar para outra tela
       System.out.println("Login válido");
       ProdutoShowView PSview = new ProdutoShowView();

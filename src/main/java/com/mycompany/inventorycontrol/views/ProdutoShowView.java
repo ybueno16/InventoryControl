@@ -14,14 +14,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class ProdutoShowView extends JFrame {
 
   private JTable table;
   private DefaultTableModel tableModel;
   private JTextField searchField;
-  private ProdutoShowController PScontroller;
+  private ProdutoShowController ProdutoShowController;
   private JButton addProdutoButton;
   private JButton searchFieldButton;
   private JMenu configMenu;
@@ -29,8 +28,8 @@ public class ProdutoShowView extends JFrame {
 
   public ProdutoShowView() {
     initComponents();
-    PScontroller = new ProdutoShowController(this);
-    PScontroller.carregarProdutos();
+    ProdutoShowController = new ProdutoShowController(this);
+    ProdutoShowController.carregarProdutos();
   }
 
   private void initComponents() {

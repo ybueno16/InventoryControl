@@ -15,7 +15,7 @@ import com.mycompany.inventorycontrol.views.LoginView;
 public class InventoryControl {
 
   public static void main(String[] args) {
-    LoginView Lview = new LoginView();
-    LoginController Lcontroller = new LoginController(Lview);
+    LoginView LoginView = new LoginView();
+    LoginController LoginController = new LoginController(LoginView);
   }
 }

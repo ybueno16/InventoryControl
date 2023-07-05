@@ -16,12 +16,12 @@ import java.util.List;
 
 public class ProdutoShowController {
 
-  private ProdutoShowView PSview;
+  private ProdutoShowView ProdutoShowView;
 
-  public ProdutoShowController(ProdutoShowView PSview) {
-    this.PSview = PSview;
+  public ProdutoShowController(ProdutoShowView produtoShowView) {
+    this.ProdutoShowView = produtoShowView;
 
-    PSview
+    produtoShowView
         .getAddProdutoButton()
         .addActionListener(
             new ActionListener() {
@@ -31,7 +31,7 @@ public class ProdutoShowController {
               }
             });
 
-    PSview
+    produtoShowView
         .getSearchFieldButton()
         .addActionListener(
             new ActionListener() {
@@ -41,7 +41,7 @@ public class ProdutoShowController {
               }
             });
 
-    PSview
+    produtoShowView
         .getUserConfig()
         .addActionListener(
             new ActionListener() {
@@ -51,7 +51,7 @@ public class ProdutoShowController {
               }
             });
 
-    this.PSview.getSearchField()
+    this.ProdutoShowView.getSearchField()
         .addKeyListener(
             new KeyAdapter() {
               public void keyPressed(KeyEvent e) {
@@ -65,11 +65,11 @@ public class ProdutoShowController {
               }
             });
 
-    this.PSview.getTable().addMouseListener(new MouseAdapter() {
+    this.ProdutoShowView.getTable().addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
           Point pnt = e.getPoint();
-          int row = PSview.getTable().rowAtPoint(pnt);
+          int row = produtoShowView.getTable().rowAtPoint(pnt);
           if (row != -1) {
             System.out.println("Abrindo tela de edição");
           }
@@ -79,7 +79,7 @@ public class ProdutoShowController {
   }
 
   public void carregarProdutos() {
-    PSview.getTableModel().setRowCount(0);
+    ProdutoShowView.getTableModel().setRowCount(0);
     List<ProdutoShow> produtos = getProdutos();
     for (ProdutoShow produto : produtos) {
       adicionarProdutoTabela(produto);
@@ -87,7 +87,7 @@ public class ProdutoShowController {
   }
 
   public void limparTabela() {
-    PSview.getTableModel().setRowCount(0);
+    ProdutoShowView.getTableModel().setRowCount(0);
   }
 
   public void adicionarProdutoTabela(ProdutoShow produto) {
@@ -98,7 +98,7 @@ public class ProdutoShowController {
         produto.getPreco(),
         produto.getqntEstoque(),
     };
-    PSview.getTableModel().addRow(row);
+    ProdutoShowView.getTableModel().addRow(row);
   }
 
   public void exibirTelaAdicionarProduto() {
@@ -109,7 +109,7 @@ public class ProdutoShowController {
 
   public void pesquisaProduto() {
     limparTabela();
-    String searchField = PSview.getSearchField().getText();
+    String searchField = ProdutoShowView.getSearchField().getText();
     List<ProdutoShow> produtos = ProdutoShow.PesquisaProduto(searchField);
     for (ProdutoShow produto : produtos) {
       adicionarProdutoTabela(produto);
