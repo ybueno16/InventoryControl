@@ -4,7 +4,7 @@ import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoShowView;
-import com.mycompany.inventorycontrol.views.ProdutoView;
+import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -102,8 +102,8 @@ public class ProdutoShowController {
   }
 
   public void exibirTelaAdicionarProduto() {
-    ProdutoView Pview = new ProdutoView();
-    ProdutoController Pcontroller = new ProdutoController(Pview, this);
+    ProdutoAddView Pview = new ProdutoAddView();
+    ProdutoAddController Pcontroller = new ProdutoAddController(Pview, this);
     Pview.setVisible(true);
   }
 

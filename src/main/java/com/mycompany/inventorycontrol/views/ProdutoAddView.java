@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ProdutoView extends JFrame {
+public class ProdutoAddView extends JFrame {
 
   private final JTextField textProduto;
   private final JTextField textDescricao;
@@ -17,7 +17,7 @@ public class ProdutoView extends JFrame {
   private final JTextField textQntEstoque;
   private final JButton buttonAdd;
 
-  public ProdutoView() {
+  public ProdutoAddView() {
     setTitle("Cadastro de Produtos");
     setSize(800, 600);
     setLocationRelativeTo(null);

@@ -2,21 +2,21 @@ package com.mycompany.inventorycontrol.controllers;
 
 import com.mycompany.inventorycontrol.models.produtoAdd;
 import com.mycompany.inventorycontrol.models.produtoAdd.conexaoDAO;
-import com.mycompany.inventorycontrol.views.ProdutoView;
+import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ProdutoController implements ActionListener {
+public class ProdutoAddController implements ActionListener {
 
-  private ProdutoView view;
+  private ProdutoAddView view;
   private conexaoDAO dao;
   private ProdutoShowController ProdutoShowController;
 
-  public ProdutoController(
-    ProdutoView pview,
+  public ProdutoAddController(
+    ProdutoAddView view,
     ProdutoShowController produtoShowController
   ) {
-    this.view = pview;
+    this.view = view;
     this.dao = new conexaoDAO();
     this.ProdutoShowController = produtoShowController;
     this.view.getButtonAdd().addActionListener(this);
