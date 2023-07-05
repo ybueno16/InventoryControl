@@ -62,7 +62,7 @@ public class Produto {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conexao =
           DriverManager.getConnection(
-            "jdbc:mysql://172.17.0.2:3306/inventoryControl",
+            "jdbc:mysql://localhost:3306/inventoryControl",
             "root",
             "123"
           );

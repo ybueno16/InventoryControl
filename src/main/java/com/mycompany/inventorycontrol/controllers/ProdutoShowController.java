@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.Point;
 import java.util.List;
 
 public class ProdutoShowController {
@@ -19,52 +22,60 @@ public class ProdutoShowController {
     this.PSview = PSview;
 
     PSview
-      .getAddProdutoButton()
-      .addActionListener(
-        new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            exibirTelaAdicionarProduto();
-          }
-        }
-      );
+        .getAddProdutoButton()
+        .addActionListener(
+            new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                exibirTelaAdicionarProduto();
+              }
+            });
 
     PSview
-      .getSearchFieldButton()
-      .addActionListener(
-        new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            pesquisaProduto();
-          }
-        }
-      );
+        .getSearchFieldButton()
+        .addActionListener(
+            new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                pesquisaProduto();
+              }
+            });
 
     PSview
-      .getUserConfig()
-      .addActionListener(
-        new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent event) {
-            System.out.println("Menu clicado"); // Instanciar tela usuario
-          }
-        }
-      );
+        .getUserConfig()
+        .addActionListener(
+            new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent event) {
+                System.out.println("Menu clicado"); // Instanciar tela usuario
+              }
+            });
 
     this.PSview.getSearchField()
-      .addKeyListener(
-        new KeyAdapter() {
-          public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-            if (keyCode == KeyEvent.VK_ENTER) {
-              System.out.println("Tecla pressionada");
-              pesquisaProduto();
-            } else {
-              // Nada acontece se outra tecla for pressionada
-            }
+        .addKeyListener(
+            new KeyAdapter() {
+              public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_ENTER) {
+                  System.out.println("Tecla pressionada");
+                  pesquisaProduto();
+                } else {
+                  // Nada acontece se outra tecla for pressionada
+                }
+              }
+            });
+
+    this.PSview.getTable().addMouseListener(new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          Point pnt = e.getPoint();
+          int row = PSview.getTable().rowAtPoint(pnt);
+          if (row != -1) {
+            System.out.println("Abrindo tela de edição");
           }
         }
-      );
+      }
+    });
   }
 
   public void carregarProdutos() {
@@ -81,11 +92,11 @@ public class ProdutoShowController {
 
   public void adicionarProdutoTabela(ProdutoShow produto) {
     Object[] row = new Object[] {
-      produto.getId(),
-      produto.getNome(),
-      produto.getDescricao(),
-      produto.getPreco(),
-      produto.getqntEstoque(),
+        produto.getId(),
+        produto.getNome(),
+        produto.getDescricao(),
+        produto.getPreco(),
+        produto.getqntEstoque(),
     };
     PSview.getTableModel().addRow(row);
   }

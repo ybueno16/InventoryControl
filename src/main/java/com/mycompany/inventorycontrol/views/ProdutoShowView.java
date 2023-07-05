@@ -1,7 +1,6 @@
 package com.mycompany.inventorycontrol.views;
 
 import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
-import com.mycompany.inventorycontrol.models.ProdutoShow;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class ProdutoShowView extends JFrame {
 
@@ -38,7 +38,12 @@ public class ProdutoShowView extends JFrame {
     setTitle("Lista de Produtos");
     setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-    tableModel = new DefaultTableModel();
+    tableModel = new DefaultTableModel(){
+      @Override
+      public boolean isCellEditable(int row, int column){
+        return false;
+      }
+    };
     tableModel.addColumn("ID");
     tableModel.addColumn("Nome");
     tableModel.addColumn("Descrição");
@@ -72,6 +77,10 @@ public class ProdutoShowView extends JFrame {
     menuBar.add(configMenu);
     this.setJMenuBar(menuBar);
     this.setVisible(true);
+  }
+
+  public JTable getTable() {
+    return table;
   }
 
   public DefaultTableModel getTableModel() {
