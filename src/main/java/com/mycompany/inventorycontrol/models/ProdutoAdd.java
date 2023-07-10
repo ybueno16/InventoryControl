@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author yuri
  */
-public class produtoAdd {
+public class ProdutoAdd {
 
   private int id;
   private final String nome;
@@ -23,7 +23,7 @@ public class produtoAdd {
   private static conexaoDAO instancia;
 
   //Constructor
-  public produtoAdd(String nome, String descricao, double preco, int qntEstoque) {
+  public ProdutoAdd(String nome, String descricao, double preco, int qntEstoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
@@ -62,7 +62,7 @@ public class produtoAdd {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conexao =
           DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/inventoryControl",
+            "jdbc:mysql://172.17.0.2:3306/inventoryControl",
             "root",
             "123"
           );
@@ -84,7 +84,7 @@ public class produtoAdd {
       return conexao;
     }
 
-    public void adicionarProduto(produtoAdd produto) {
+    public void adicionarProduto(ProdutoAdd produto) {
       try {
         PreparedStatement stmt = conexao.prepareStatement(
           "INSERT INTO produto (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)"
