@@ -7,6 +7,7 @@ package com.mycompany.inventorycontrol;
 
 import com.mycompany.inventorycontrol.controllers.LoginController;
 import com.mycompany.inventorycontrol.views.LoginView;
+import com.mycompany.inventorycontrol.views.ProdutoEditView;
 
 /**
  *
@@ -17,5 +18,7 @@ public class InventoryControl {
   public static void main(String[] args) {
     LoginView LoginView = new LoginView();
     LoginController LoginController = new LoginController(LoginView);
+
+    //ProdutoEditView ProdutoEditView = new ProdutoEditView();
   }
 }
