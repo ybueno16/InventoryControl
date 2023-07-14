@@ -4,7 +4,6 @@ import com.mycompany.inventorycontrol.models.ProdutoAdd.conexaoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-
 public class ProdutoEdit {
 
   private final String nome;
@@ -31,8 +30,6 @@ public class ProdutoEdit {
     return this.id;
   }
 
-
-
   public class EditarProduto {
 
     public boolean editarProduto(EditarProduto editarProduto) {
@@ -54,5 +51,4 @@ public class ProdutoEdit {
       return false;
     }
   }
-
 }

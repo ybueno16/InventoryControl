@@ -2,6 +2,7 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
+import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
@@ -126,7 +127,7 @@ public class ProdutoShowController {
     }
   }
 
-  public void editarProduto() {
+  public static void editarProduto() {
     ProdutoEditView view = new ProdutoEditView();
     ProdutoEditController controller = new ProdutoEditController();
   }

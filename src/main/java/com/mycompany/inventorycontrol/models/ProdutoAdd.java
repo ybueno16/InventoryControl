@@ -23,7 +23,12 @@ public class ProdutoAdd {
   private static conexaoDAO instancia;
 
   //Constructor
-  public ProdutoAdd(String nome, String descricao, double preco, int qntEstoque) {
+  public ProdutoAdd(
+    String nome,
+    String descricao,
+    double preco,
+    int qntEstoque
+  ) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
