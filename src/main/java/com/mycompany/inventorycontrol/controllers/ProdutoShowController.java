@@ -2,10 +2,13 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
+import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
+import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
 import com.mycompany.inventorycontrol.views.ProdutoShowView;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +21,7 @@ import java.util.List;
 public class ProdutoShowController {
 
   private ProdutoShowView ProdutoShowView;
+  private ProdutoEditView view;
 
 
   public ProdutoShowController(ProdutoShowView produtoShowView){
@@ -96,6 +100,7 @@ public class ProdutoShowController {
               if (row != -1) {
                 String nome = getNomeFromTable();
                 System.out.println(nome);
+                
               }
             }
           }
@@ -151,6 +156,7 @@ public class ProdutoShowController {
       );
   }
 
+
   public void carregarProdutos() {
     ProdutoShowView.getTableModel().setRowCount(0);
     List<ProdutoShow> produtos = getProdutos();
@@ -192,6 +198,8 @@ public class ProdutoShowController {
   public static void editarProduto() {
     ProdutoEditView view = new ProdutoEditView();
     ProdutoEditController controller = new ProdutoEditController();
+    
+
   }
 
   public int getIdFromTable() {
