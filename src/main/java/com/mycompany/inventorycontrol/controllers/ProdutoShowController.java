@@ -18,10 +18,10 @@ import java.util.List;
 public class ProdutoShowController {
 
   private ProdutoShowView ProdutoShowView;
-  private ProdutoEditView ProdutoEditView;
+
 
   public ProdutoShowController(ProdutoShowView produtoShowView){
-    this.ProdutoEditView = ProdutoEditView;
+    this.ProdutoShowView = produtoShowView; 
 
     produtoShowView
       .getAddProdutoButton()
