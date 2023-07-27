@@ -11,7 +11,11 @@ public class ProdutoEdit {
   private final double preco;
   private final int qntEstoque;
   private static conexaoDAO instancia;
-  private int id;
+  private int idShow;
+  private String descShow;
+  private String nomeShow;
+  private Double precoShow;
+  private int qntEstoqueShow;
 
   //Constructor
   public ProdutoEdit(
@@ -27,7 +31,23 @@ public class ProdutoEdit {
   }
 
   public int getId() {
-    return this.id;
+    return this.idShow;
+  }
+
+  public String getNome() {
+    return this.nomeShow;
+  }
+
+  public String getDescricao() {
+    return this.descShow;
+  }
+
+  public Double getPreco() {
+    return this.precoShow;
+  }
+
+  public int getQntEstoque() {
+    return this.qntEstoqueShow;
   }
 
   public class EditarProduto {
@@ -38,15 +58,15 @@ public class ProdutoEdit {
         String query =
           "UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ? WHERE id = ?";
         PreparedStatement statement = conexao.prepareStatement(query);
-        statement.setString(1, nome);
-        statement.setString(2, descricao);
-        statement.setDouble(3, preco);
-        statement.setInt(4, qntEstoque);
+        statement.setString(1, getNome());
+        statement.setString(2, getDescricao());
+        statement.setDouble(3, getPreco());
+        statement.setInt(4, getQntEstoque());
         statement.setInt(5, getId());
         int rowsAffected = statement.executeUpdate();
         conexao.close();
       } catch (Exception e) {
-        // TODO: handle exception
+        System.out.println("Erro ao adicionar o produto" + e.getMessage());
       }
       return false;
     }

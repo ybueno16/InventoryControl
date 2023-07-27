@@ -38,6 +38,7 @@ public class ProdutoEditView extends JFrame {
     constraints.anchor = GridBagConstraints.CENTER;
     panel.add(textProduto, constraints);
 
+
     JLabel labelDescricao = new JLabel("Descrição:");
     constraints.gridx = 0;
     constraints.gridy = 1;

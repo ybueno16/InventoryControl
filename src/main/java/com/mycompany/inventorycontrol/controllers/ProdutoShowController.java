@@ -2,7 +2,6 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
-import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
@@ -19,9 +18,10 @@ import java.util.List;
 public class ProdutoShowController {
 
   private ProdutoShowView ProdutoShowView;
+  private ProdutoEditView ProdutoEditView;
 
-  public ProdutoShowController(ProdutoShowView produtoShowView) {
-    this.ProdutoShowView = produtoShowView;
+  public ProdutoShowController(ProdutoShowView produtoShowView){
+    this.ProdutoEditView = ProdutoEditView;
 
     produtoShowView
       .getAddProdutoButton()
@@ -64,8 +64,6 @@ public class ProdutoShowController {
             if (keyCode == KeyEvent.VK_ENTER) {
               System.out.println("Tecla pressionada");
               pesquisaProduto();
-            } else {
-              // Nada acontece se outra tecla for pressionada
             }
           }
         }
@@ -82,6 +80,70 @@ public class ProdutoShowController {
                 int id = getIdFromTable();
                 System.out.println(id);
                 editarProduto(); //Instacia tela de edição de produto
+              }
+            }
+          }
+        }
+      );
+
+    this.ProdutoShowView.getTable()
+      .addMouseListener(
+        new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+              Point pnt = e.getPoint();
+              int row = produtoShowView.getTable().rowAtPoint(pnt);
+              if (row != -1) {
+                String nome = getNomeFromTable();
+                System.out.println(nome);
+              }
+            }
+          }
+        }
+      );
+
+    this.ProdutoShowView.getTable()
+      .addMouseListener(
+        new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+              Point pnt = e.getPoint();
+              int row = produtoShowView.getTable().rowAtPoint(pnt);
+              if (row != -1) {
+                String descricao = getDescricaoFromTable();
+                System.out.println(descricao);
+              }
+            }
+          }
+        }
+      );
+
+    this.ProdutoShowView.getTable()
+      .addMouseListener(
+        new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+              Point pnt = e.getPoint();
+              int row = produtoShowView.getTable().rowAtPoint(pnt);
+              if (row != -1) {
+                Double preco = getPrecoFromTable();
+                System.out.println(preco);
+              }
+            }
+          }
+        }
+      );
+
+    this.ProdutoShowView.getTable()
+      .addMouseListener(
+        new MouseAdapter() {
+          public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+              Point pnt = e.getPoint();
+              int row = produtoShowView.getTable().rowAtPoint(pnt);
+              if (row != -1) {
+                int qntEstoque = getQntEstoqueFromTable();
+                System.out.println(qntEstoque);
               }
             }
           }
@@ -145,5 +207,65 @@ public class ProdutoShowController {
       .getTable()
       .getModel()
       .getValueAt(selectedRowInModel, idColumnIndex);
+  }
+
+  public String getNomeFromTable() {
+    int selectedRow = ProdutoShowView.getTable().getSelectedRow();
+    int selectedRowInModel = ProdutoShowView
+      .getTable()
+      .convertRowIndexToModel(selectedRow);
+    int nomeColumnIndex = ProdutoShowView
+      .getTable()
+      .getColumnModel()
+      .getColumnIndex("Nome");
+    return (String) ProdutoShowView
+      .getTable()
+      .getModel()
+      .getValueAt(selectedRowInModel, nomeColumnIndex);
+  }
+
+  public String getDescricaoFromTable() {
+    int selectedRow = ProdutoShowView.getTable().getSelectedRow();
+    int selectedRowInModel = ProdutoShowView
+      .getTable()
+      .convertRowIndexToModel(selectedRow);
+    int descricaoColumnIndex = ProdutoShowView
+      .getTable()
+      .getColumnModel()
+      .getColumnIndex("Descrição");
+    return (String) ProdutoShowView
+      .getTable()
+      .getModel()
+      .getValueAt(selectedRowInModel, descricaoColumnIndex);
+  }
+
+  public Double getPrecoFromTable() {
+    int selectedRow = ProdutoShowView.getTable().getSelectedRow();
+    int selectedRowInModel = ProdutoShowView
+      .getTable()
+      .convertRowIndexToModel(selectedRow);
+    int precoColumnIndex = ProdutoShowView
+      .getTable()
+      .getColumnModel()
+      .getColumnIndex("Preço");
+    return (Double) ProdutoShowView
+      .getTable()
+      .getModel()
+      .getValueAt(selectedRowInModel, precoColumnIndex);
+  }
+
+  public int getQntEstoqueFromTable() {
+    int selectedRow = ProdutoShowView.getTable().getSelectedRow();
+    int selectedRowInModel = ProdutoShowView
+      .getTable()
+      .convertRowIndexToModel(selectedRow);
+    int qntEstoqueColumnIndex = ProdutoShowView
+      .getTable()
+      .getColumnModel()
+      .getColumnIndex("Quantidade em Estoque");
+    return (int) ProdutoShowView
+      .getTable()
+      .getModel()
+      .getValueAt(selectedRowInModel, qntEstoqueColumnIndex);
   }
 }
