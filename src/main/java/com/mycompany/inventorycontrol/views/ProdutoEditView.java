@@ -23,6 +23,23 @@ public class ProdutoEditView extends JFrame {
     textProduto.setText(nomeProduto);
   }
 
+  public void setDescricaoProduto(String descricaoProduto) {
+    textDescricao.setText(descricaoProduto);
+  }
+
+  public void setPrecoProduto(Double precoProduto) {
+    textPreco.setText(String.valueOf(precoProduto));
+  }
+
+    public void setQntEstoque(int qntEstoque) {
+    textQntEstoque.setText(String.valueOf(qntEstoque));
+  }
+
+
+
+
+
+
   public ProdutoEditView() {
     this.produtoEdit = produtoEdit;
     setTitle("Cadastro de Produtos");

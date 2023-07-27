@@ -2,13 +2,10 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
-import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
-import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
 import com.mycompany.inventorycontrol.views.ProdutoShowView;
-
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +18,10 @@ import java.util.List;
 public class ProdutoShowController {
 
   private ProdutoShowView ProdutoShowView;
-  private ProdutoEditView view;
+  private ProdutoEditView editView;
 
-
-  public ProdutoShowController(ProdutoShowView produtoShowView){
-    this.ProdutoShowView = produtoShowView; 
+  public ProdutoShowController(ProdutoShowView produtoShowView) {
+    this.ProdutoShowView = produtoShowView;
 
     produtoShowView
       .getAddProdutoButton()
@@ -100,7 +96,7 @@ public class ProdutoShowController {
               if (row != -1) {
                 String nome = getNomeFromTable();
                 System.out.println(nome);
-                
+                editView.setNomeProduto(nome);
               }
             }
           }
@@ -117,6 +113,7 @@ public class ProdutoShowController {
               if (row != -1) {
                 String descricao = getDescricaoFromTable();
                 System.out.println(descricao);
+                editView.setDescricaoProduto(descricao);
               }
             }
           }
@@ -133,6 +130,7 @@ public class ProdutoShowController {
               if (row != -1) {
                 Double preco = getPrecoFromTable();
                 System.out.println(preco);
+                editView.setPrecoProduto(preco);
               }
             }
           }
@@ -149,13 +147,13 @@ public class ProdutoShowController {
               if (row != -1) {
                 int qntEstoque = getQntEstoqueFromTable();
                 System.out.println(qntEstoque);
+                editView.setQntEstoque(qntEstoque);
               }
             }
           }
         }
       );
   }
-
 
   public void carregarProdutos() {
     ProdutoShowView.getTableModel().setRowCount(0);
@@ -195,11 +193,11 @@ public class ProdutoShowController {
     }
   }
 
-  public static void editarProduto() {
-    ProdutoEditView view = new ProdutoEditView();
-    ProdutoEditController controller = new ProdutoEditController();
-    
-
+  public void editarProduto() {
+    if (editView == null) {
+      editView = new ProdutoEditView();
+      ProdutoEditController controller = new ProdutoEditController();
+    }
   }
 
   public int getIdFromTable() {
