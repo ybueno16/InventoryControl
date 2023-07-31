@@ -1,13 +1,17 @@
 package com.mycompany.inventorycontrol.models;
 
+import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
 import com.mycompany.inventorycontrol.models.ProdutoAdd.conexaoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProdutoEdit {
 
   private final String nome;
   private final String descricao;
+  private ProdutoShowController produtoShowController;
   private final double preco;
   private final int qntEstoque;
   private static conexaoDAO instancia;
@@ -43,7 +47,7 @@ public class ProdutoEdit {
   }
 
   public Double getPreco() {
-    return this.precoShow;
+    return this.preco; // Alterado para retornar 'preco' em vez de 'precoShow'
   }
 
   public int getQntEstoque() {
@@ -52,23 +56,68 @@ public class ProdutoEdit {
 
   public class EditarProduto {
 
-    public boolean editarProduto(EditarProduto editarProduto) {
-      try {
-        Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao();
+    public void editarProduto(
+      String nome,
+      String descricao,
+      Double preco,
+      int qntEstoque,
+      int id
+    ) {
+      try (
+        Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao()
+      ) {
+        conexao.setAutoCommit(false);
         String query =
           "UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ? WHERE id = ?";
-        PreparedStatement statement = conexao.prepareStatement(query);
-        statement.setString(1, getNome());
-        statement.setString(2, getDescricao());
-        statement.setDouble(3, getPreco());
-        statement.setInt(4, getQntEstoque());
-        statement.setInt(5, getId());
-        int rowsAffected = statement.executeUpdate();
-        conexao.close();
-      } catch (Exception e) {
-        System.out.println("Erro ao adicionar o produto" + e.getMessage());
+
+        try (PreparedStatement statement = conexao.prepareStatement(query)) {
+          statement.setString(1, nome);
+          statement.setString(2, descricao);
+          statement.setDouble(3, preco);
+          statement.setInt(4, qntEstoque);
+          statement.setInt(5, id);
+
+          int rowsAffected = statement.executeUpdate();
+          System.out.println("Rows affected: " + rowsAffected);
+
+          if (rowsAffected > 0) {
+            conexao.commit();
+
+            PreparedStatement selectStatement = conexao.prepareStatement(
+              "SELECT * FROM produto WHERE id = ?"
+            );
+            selectStatement.setInt(1, id);
+
+            ResultSet rs = selectStatement.executeQuery();
+
+            while (rs.next()) {
+              System.out.println(
+                "Nome: " +
+                rs.getString("nome") +
+                " Descricao: " +
+                rs.getString("descricao") +
+                " preco: " +
+                rs.getDouble("preco") +
+                " qntEstoque: " +
+                rs.getInt("qntEstoque")
+              );
+            }
+            rs.close();
+            selectStatement.close();
+          } else {
+            conexao.rollback();
+            System.out.println(
+              "No rows updated. Check if product with provided ID exists."
+            );
+          }
+        } catch (Exception e) {
+          conexao.rollback();
+        } finally {
+          conexao.setAutoCommit(true);
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
       }
-      return false;
     }
   }
 }

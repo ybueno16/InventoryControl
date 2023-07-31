@@ -18,7 +18,5 @@ public class InventoryControl {
   public static void main(String[] args) {
     LoginView LoginView = new LoginView();
     LoginController LoginController = new LoginController(LoginView);
-
-    //ProdutoEditView ProdutoEditView = new ProdutoEditView();
   }
 }

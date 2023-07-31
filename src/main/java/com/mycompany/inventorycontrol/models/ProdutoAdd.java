@@ -4,6 +4,8 @@
  */
 package com.mycompany.inventorycontrol.models;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -60,56 +62,54 @@ public class ProdutoAdd {
   //Connection on MySQL
   public static class conexaoDAO {
 
-    private Connection conexao;
+    private HikariDataSource ds;
 
-    public conexaoDAO() {
-      try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conexao =
-          DriverManager.getConnection(
-            "jdbc:mysql://172.17.0.2:3306/inventoryControl",
-            "root",
-            "123"
-          );
-      } catch (ClassNotFoundException | SQLException e) {
-        System.out.println(
-          "Erro ao tentar conectar-se ao banco de dados " + e.getMessage()
-        );
-      }
+    private conexaoDAO() {
+      HikariConfig config = new HikariConfig();
+      config.setJdbcUrl("jdbc:mysql://172.17.0.2:3306/inventoryControl");
+      config.setUsername("root");
+      config.setPassword("123");
+      ds = new HikariDataSource(config);
     }
 
+    private static conexaoDAO instancia = new conexaoDAO();
+
     public static conexaoDAO getInstancia() {
-      if (instancia == null) {
-        instancia = new conexaoDAO();
-      }
       return instancia;
     }
 
-    public Connection getConexao() {
-      return conexao;
+    public Connection getConexao() throws SQLException {
+      return ds.getConnection();
     }
 
     public void adicionarProduto(ProdutoAdd produto) {
-      try {
-        PreparedStatement stmt = conexao.prepareStatement(
+      try (
+        Connection conn = getConexao();
+        PreparedStatement stmt = conn.prepareStatement(
           "INSERT INTO produto (nome,descricao,preco,qntEstoque) VALUES (?,?,?,?)"
-        );
+        )
+      ) {
         stmt.setString(1, produto.getNome());
         stmt.setString(2, produto.getDescricao());
         stmt.setDouble(3, produto.getPreco());
         stmt.setInt(4, produto.getQntEstoque());
         stmt.executeUpdate();
-        stmt.close();
       } catch (SQLException e) {
         System.out.println("Erro ao adicionar o produto " + e.getMessage());
       }
     }
 
-    public void fecharConexao() {
+    public void fecharConexão() throws SQLException {
+      Connection conn = getConexao();
       try {
-        conexao.close();
-      } catch (SQLException e) {
-        System.out.println("Erro ao fechar a conexão " + e.getMessage());
+        if (conn != null) {
+          conn.close();
+          System.out.println("Database connection closed.");
+        }
+      } catch (SQLException ex) {
+        System.err.println("Cannot close connection: " + ex.getMessage());
+      } finally {
+        conn = null; // It's a good practice to null your Connection object after you close it.
       }
     }
   }

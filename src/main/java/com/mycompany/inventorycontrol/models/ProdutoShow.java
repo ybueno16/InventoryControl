@@ -33,11 +33,14 @@ public class ProdutoShow {
   // Método para obter a lista de produtos do banco de dados
   public static List<ProdutoShow> getProdutos() {
     List<ProdutoShow> produtos = new ArrayList<>();
+    Connection conexao = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
     try {
-      Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao();
-      Statement statement = conexao.createStatement();
+      conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao();
+      statement = conexao.createStatement();
       String query = "SELECT * FROM produto";
-      ResultSet resultSet = statement.executeQuery(query);
+      resultSet = statement.executeQuery(query);
       while (resultSet.next()) {
         int id = resultSet.getInt("id");
         String nome = resultSet.getString("nome");

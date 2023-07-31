@@ -16,8 +16,8 @@ public class ProdutoEditView extends JFrame {
   private final JTextField textDescricao;
   private final JTextField textPreco;
   private final JTextField textQntEstoque;
-  private final JButton buttonAdd;
-  private ProdutoEdit produtoEdit;
+  private final JButton buttonEdit;
+  private final JTextField textId;
 
   public void setNomeProduto(String nomeProduto) {
     textProduto.setText(nomeProduto);
@@ -31,18 +31,16 @@ public class ProdutoEditView extends JFrame {
     textPreco.setText(String.valueOf(precoProduto));
   }
 
-    public void setQntEstoque(int qntEstoque) {
+  public void setQntEstoque(int qntEstoque) {
     textQntEstoque.setText(String.valueOf(qntEstoque));
   }
 
-
-
-
-
+  public void setIdProduto(int idProduto) {
+    textId.setText(String.valueOf(idProduto));
+  }
 
   public ProdutoEditView() {
-    this.produtoEdit = produtoEdit;
-    setTitle("Cadastro de Produtos");
+    setTitle("Edição de Produtos");
     setSize(800, 600);
     setLocationRelativeTo(null);
 
@@ -95,12 +93,25 @@ public class ProdutoEditView extends JFrame {
     constraints.anchor = GridBagConstraints.CENTER;
     panel.add(textQntEstoque, constraints);
 
-    buttonAdd = new JButton("Editar");
+    JLabel labelId = new JLabel("ID do Produto:");
     constraints.gridx = 0;
-    constraints.gridy = 4;
+    constraints.gridy = 4; // Change this to 4
+    constraints.anchor = GridBagConstraints.EAST;
+    panel.add(labelId, constraints);
+
+    textId = new JTextField(20);
+    textId.setEditable(false); // This makes the text field non-editable
+    constraints.gridx = 1;
+    constraints.gridy = 4; // Change this to 4
+    constraints.anchor = GridBagConstraints.CENTER;
+    panel.add(textId, constraints);
+
+    buttonEdit = new JButton("Editar");
+    constraints.gridx = 0;
+    constraints.gridy = 5; // Change this to 5
     constraints.gridwidth = 2;
     constraints.anchor = GridBagConstraints.CENTER;
-    panel.add(buttonAdd, constraints);
+    panel.add(buttonEdit, constraints);
 
     add(panel);
     setVisible(true);
@@ -118,12 +129,16 @@ public class ProdutoEditView extends JFrame {
     return textPreco;
   }
 
-  public JButton getButtonAdd() {
-    return buttonAdd;
+  public JButton getButtonEdit() {
+    return buttonEdit;
   }
 
   public JTextField getTextQntEstoque() {
     return textQntEstoque;
+  }
+
+  public JTextField getTextId() {
+    return textId;
   }
 
   public void limparCampos() {

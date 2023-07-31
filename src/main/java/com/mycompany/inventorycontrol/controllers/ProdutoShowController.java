@@ -2,6 +2,7 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
+import com.mycompany.inventorycontrol.controllers.ProdutoEditController;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
@@ -19,6 +20,7 @@ public class ProdutoShowController {
 
   private ProdutoShowView ProdutoShowView;
   private ProdutoEditView editView;
+  private ProdutoEditController editController;
 
   public ProdutoShowController(ProdutoShowView produtoShowView) {
     this.ProdutoShowView = produtoShowView;
@@ -78,76 +80,32 @@ public class ProdutoShowController {
               int row = produtoShowView.getTable().rowAtPoint(pnt);
               if (row != -1) {
                 int id = getIdFromTable();
-                System.out.println(id);
-                editarProduto(); //Instacia tela de edição de produto
-              }
-            }
-          }
-        }
-      );
-
-    this.ProdutoShowView.getTable()
-      .addMouseListener(
-        new MouseAdapter() {
-          public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2) {
-              Point pnt = e.getPoint();
-              int row = produtoShowView.getTable().rowAtPoint(pnt);
-              if (row != -1) {
                 String nome = getNomeFromTable();
-                System.out.println(nome);
-                editView.setNomeProduto(nome);
-              }
-            }
-          }
-        }
-      );
-
-    this.ProdutoShowView.getTable()
-      .addMouseListener(
-        new MouseAdapter() {
-          public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2) {
-              Point pnt = e.getPoint();
-              int row = produtoShowView.getTable().rowAtPoint(pnt);
-              if (row != -1) {
                 String descricao = getDescricaoFromTable();
-                System.out.println(descricao);
-                editView.setDescricaoProduto(descricao);
-              }
-            }
-          }
-        }
-      );
-
-    this.ProdutoShowView.getTable()
-      .addMouseListener(
-        new MouseAdapter() {
-          public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2) {
-              Point pnt = e.getPoint();
-              int row = produtoShowView.getTable().rowAtPoint(pnt);
-              if (row != -1) {
                 Double preco = getPrecoFromTable();
-                System.out.println(preco);
-                editView.setPrecoProduto(preco);
-              }
-            }
-          }
-        }
-      );
-
-    this.ProdutoShowView.getTable()
-      .addMouseListener(
-        new MouseAdapter() {
-          public void mouseClicked(MouseEvent e) {
-            if (e.getClickCount() == 2) {
-              Point pnt = e.getPoint();
-              int row = produtoShowView.getTable().rowAtPoint(pnt);
-              if (row != -1) {
                 int qntEstoque = getQntEstoqueFromTable();
+
+                System.out.println(id);
+                System.out.println(nome);
+                System.out.println(descricao);
+                System.out.println(preco);
                 System.out.println(qntEstoque);
+
+                editarProduto();
+                editView.setIdProduto(id);
+                editView.setNomeProduto(nome);
+                editView.setDescricaoProduto(descricao);
+                editView.setPrecoProduto(preco);
                 editView.setQntEstoque(qntEstoque);
+
+                editView.setVisible(true);
+                System.out.println(id);
+                editarProduto();
+                editView.setIdProduto(id);
+                editView.setVisible(true);
+                if (!editView.isVisible()) {
+                  editView.setVisible(true);
+                }
               }
             }
           }
@@ -196,7 +154,10 @@ public class ProdutoShowController {
   public void editarProduto() {
     if (editView == null) {
       editView = new ProdutoEditView();
-      ProdutoEditController controller = new ProdutoEditController();
+      ProdutoEditController editController = new ProdutoEditController(
+        editView,
+        this
+      );
     }
   }
 

@@ -37,12 +37,13 @@ public class ProdutoShowView extends JFrame {
     setTitle("Lista de Produtos");
     setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-    tableModel = new DefaultTableModel(){
-      @Override
-      public boolean isCellEditable(int row, int column){
-        return false;
-      }
-    };
+    tableModel =
+      new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+          return false;
+        }
+      };
     tableModel.addColumn("ID");
     tableModel.addColumn("Nome");
     tableModel.addColumn("Descrição");

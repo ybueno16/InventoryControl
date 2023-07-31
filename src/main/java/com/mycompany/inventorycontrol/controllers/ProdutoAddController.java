@@ -17,7 +17,7 @@ public class ProdutoAddController implements ActionListener {
     ProdutoShowController produtoShowController
   ) {
     this.view = view;
-    this.dao = new conexaoDAO();
+    ProdutoAdd.conexaoDAO dao = ProdutoAdd.conexaoDAO.getInstancia();
     this.ProdutoShowController = produtoShowController;
     this.view.getButtonAdd().addActionListener(this);
   }
@@ -32,7 +32,6 @@ public class ProdutoAddController implements ActionListener {
     adicionarProduto(produto);
     ProdutoShowController.limparTabela();
     ProdutoShowController.carregarProdutos();
-    dao.fecharConexao();
     view.limparCampos();
     view.dispose();
   }
