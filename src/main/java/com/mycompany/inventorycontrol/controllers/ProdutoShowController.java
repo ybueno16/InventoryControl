@@ -2,7 +2,6 @@ package com.mycompany.inventorycontrol.controllers;
 
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
-import com.mycompany.inventorycontrol.controllers.ProdutoEditController;
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
@@ -154,6 +153,7 @@ public class ProdutoShowController {
   public void editarProduto() {
     if (editView == null) {
       editView = new ProdutoEditView();
+      ProdutoDeleteController delete = new ProdutoDeleteController(editView, this);
       ProdutoEditController editController = new ProdutoEditController(
         editView,
         this

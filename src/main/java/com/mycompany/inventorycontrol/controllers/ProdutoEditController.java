@@ -1,8 +1,6 @@
 package com.mycompany.inventorycontrol.controllers;
 
-import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
 import com.mycompany.inventorycontrol.models.ProdutoAdd;
-import com.mycompany.inventorycontrol.models.ProdutoAdd.conexaoDAO;
 import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
 import java.awt.event.ActionEvent;
@@ -13,15 +11,12 @@ public class ProdutoEditController implements ActionListener {
 
   private ProdutoEditView view;
   ProdutoAdd.conexaoDAO dao = ProdutoAdd.conexaoDAO.getInstancia();
-  private ProdutoEdit edit;
   private ProdutoShowController produtoShowController;
 
   public ProdutoEditController(
-    ProdutoEditView view,
-    ProdutoShowController produtoShowController
-  ) {
+      ProdutoEditView view,
+      ProdutoShowController produtoShowController) {
     this.view = view;
-    this.edit = edit;
     this.produtoShowController = produtoShowController;
     this.view.getButtonEdit().addActionListener(this);
   }
@@ -35,12 +30,11 @@ public class ProdutoEditController implements ActionListener {
     int id = Integer.parseInt(view.getTextId().getText());
 
     ProdutoEdit.EditarProduto produtoEdit = new ProdutoEdit(
-      nome,
-      descricao,
-      preco,
-      qntEstoque
-    )
-      .new EditarProduto();
+        nome,
+        descricao,
+        preco,
+        qntEstoque).new EditarProduto();
+    ProdutoDeleteController deleteController = new ProdutoDeleteController(view, produtoShowController);
     try {
       produtoEdit.editarProduto(nome, descricao, preco, qntEstoque, id);
     } finally {
@@ -57,14 +51,14 @@ public class ProdutoEditController implements ActionListener {
   }
 
   public void editarProduto(
-    ProdutoEdit editarProduto,
-    String nome,
-    String descricao,
-    double preco,
-    int qntEstoque,
-    int id
-  ) throws SQLException {
+      ProdutoEdit editarProduto,
+      String nome,
+      String descricao,
+      double preco,
+      int qntEstoque,
+      int id) throws SQLException {
     ProdutoEdit.EditarProduto editor = editarProduto.new EditarProduto();
     editor.editarProduto(nome, descricao, preco, qntEstoque, id);
   }
+
 }

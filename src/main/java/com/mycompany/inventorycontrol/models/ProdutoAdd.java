@@ -66,7 +66,7 @@ public class ProdutoAdd {
 
     private conexaoDAO() {
       HikariConfig config = new HikariConfig();
-      config.setJdbcUrl("jdbc:mysql://172.17.0.2:3306/inventoryControl");
+      config.setJdbcUrl("jdbc:mysql://localhost:3306/inventoryControl");
       config.setUsername("root");
       config.setPassword("123");
       ds = new HikariDataSource(config);

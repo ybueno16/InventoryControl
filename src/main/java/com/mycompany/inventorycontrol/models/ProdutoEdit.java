@@ -21,13 +21,12 @@ public class ProdutoEdit {
   private Double precoShow;
   private int qntEstoqueShow;
 
-  //Constructor
+  // Constructor
   public ProdutoEdit(
-    String nome,
-    String descricao,
-    double preco,
-    int qntEstoque
-  ) {
+      String nome,
+      String descricao,
+      double preco,
+      int qntEstoque) {
     this.nome = nome;
     this.descricao = descricao;
     this.preco = preco;
@@ -47,7 +46,7 @@ public class ProdutoEdit {
   }
 
   public Double getPreco() {
-    return this.preco; // Alterado para retornar 'preco' em vez de 'precoShow'
+    return this.preco;
   }
 
   public int getQntEstoque() {
@@ -57,18 +56,15 @@ public class ProdutoEdit {
   public class EditarProduto {
 
     public void editarProduto(
-      String nome,
-      String descricao,
-      Double preco,
-      int qntEstoque,
-      int id
-    ) {
+        String nome,
+        String descricao,
+        Double preco,
+        int qntEstoque,
+        int id) {
       try (
-        Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao()
-      ) {
+          Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao()) {
         conexao.setAutoCommit(false);
-        String query =
-          "UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ? WHERE id = ?";
+        String query = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, qntEstoque = ? WHERE id = ?";
 
         try (PreparedStatement statement = conexao.prepareStatement(query)) {
           statement.setString(1, nome);
@@ -84,31 +80,28 @@ public class ProdutoEdit {
             conexao.commit();
 
             PreparedStatement selectStatement = conexao.prepareStatement(
-              "SELECT * FROM produto WHERE id = ?"
-            );
+                "SELECT * FROM produto WHERE id = ?");
             selectStatement.setInt(1, id);
 
             ResultSet rs = selectStatement.executeQuery();
 
             while (rs.next()) {
               System.out.println(
-                "Nome: " +
-                rs.getString("nome") +
-                " Descricao: " +
-                rs.getString("descricao") +
-                " preco: " +
-                rs.getDouble("preco") +
-                " qntEstoque: " +
-                rs.getInt("qntEstoque")
-              );
+                  "Nome: " +
+                      rs.getString("nome") +
+                      " Descricao: " +
+                      rs.getString("descricao") +
+                      " preco: " +
+                      rs.getDouble("preco") +
+                      " qntEstoque: " +
+                      rs.getInt("qntEstoque"));
             }
             rs.close();
             selectStatement.close();
           } else {
             conexao.rollback();
             System.out.println(
-              "No rows updated. Check if product with provided ID exists."
-            );
+                "No rows updated. Check if product with provided ID exists.");
           }
         } catch (Exception e) {
           conexao.rollback();

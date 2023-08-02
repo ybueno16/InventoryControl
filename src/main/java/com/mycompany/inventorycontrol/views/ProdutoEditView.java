@@ -1,6 +1,5 @@
 package com.mycompany.inventorycontrol.views;
 
-import com.mycompany.inventorycontrol.models.ProdutoEdit;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -17,6 +16,7 @@ public class ProdutoEditView extends JFrame {
   private final JTextField textPreco;
   private final JTextField textQntEstoque;
   private final JButton buttonEdit;
+  private final JButton buttonDelete;
   private final JTextField textId;
 
   public void setNomeProduto(String nomeProduto) {
@@ -113,6 +113,13 @@ public class ProdutoEditView extends JFrame {
     constraints.anchor = GridBagConstraints.CENTER;
     panel.add(buttonEdit, constraints);
 
+    buttonDelete = new JButton("Apagar Registro");
+    constraints.gridx = 0;
+    constraints.gridy = 6; // Change this to 5
+    constraints.gridwidth = 3;
+    constraints.anchor = GridBagConstraints.CENTER;
+    panel.add(buttonDelete, constraints);
+
     add(panel);
     setVisible(true);
   }
@@ -131,6 +138,11 @@ public class ProdutoEditView extends JFrame {
 
   public JButton getButtonEdit() {
     return buttonEdit;
+  }
+
+  
+  public JButton getButtonDelete() {
+    return buttonDelete;
   }
 
   public JTextField getTextQntEstoque() {
