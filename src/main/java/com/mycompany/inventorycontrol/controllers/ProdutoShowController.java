@@ -6,6 +6,8 @@ import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
 import com.mycompany.inventorycontrol.views.ProdutoShowView;
+import com.mycompany.inventorycontrol.views.UserShowView;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +54,8 @@ public class ProdutoShowController {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent event) {
-            System.out.println("Menu clicado"); // Instanciar tela usuario
+            UserShowView userShowView = new UserShowView();
+            
           }
         }
       );
