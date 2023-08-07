@@ -3,18 +3,7 @@ package com.mycompany.inventorycontrol.views;
 import com.mycompany.inventorycontrol.controllers.ProdutoShowController;
 import java.awt.BorderLayout;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Component;
@@ -76,11 +65,19 @@ public class ProdutoShowView extends JFrame {
 
     JMenuBar menuBar = new JMenuBar();
     configMenu = new JMenu("Configurações");
-    userConfig = new JMenuItem("Criar/Alterar Usuário");
+    userConfig = new JMenuItem("Gerar Relatório");
     configMenu.add(userConfig);
     menuBar.add(configMenu);
     this.setJMenuBar(menuBar);
     this.setVisible(true);
+  }
+  public void exibirMensagemConclusao() {
+    JOptionPane.showMessageDialog(
+            this,
+            "Foi gerado o relatório com sucesso",
+            "Relatório",
+            JOptionPane.INFORMATION_MESSAGE
+    );
   }
 
   public JTable getTable() {

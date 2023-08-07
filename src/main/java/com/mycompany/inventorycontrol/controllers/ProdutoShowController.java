@@ -1,12 +1,12 @@
 package com.mycompany.inventorycontrol.controllers;
 
+import static com.mycompany.inventorycontrol.models.ProdutoShow.geraRelatorio;
 import static com.mycompany.inventorycontrol.models.ProdutoShow.getProdutos;
 
 import com.mycompany.inventorycontrol.models.ProdutoShow;
 import com.mycompany.inventorycontrol.views.ProdutoAddView;
 import com.mycompany.inventorycontrol.views.ProdutoEditView;
 import com.mycompany.inventorycontrol.views.ProdutoShowView;
-import com.mycompany.inventorycontrol.views.UserShowView;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProdutoShowController {
@@ -54,8 +55,13 @@ public class ProdutoShowController {
         new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent event) {
-            UserShowView userShowView = new UserShowView();
-            
+            try {
+              geraRelatorio();
+              produtoShowView.exibirMensagemConclusao();
+            } catch (SQLException e) {
+              throw new RuntimeException(e);
+            }
+
           }
         }
       );

@@ -1,11 +1,17 @@
 package com.mycompany.inventorycontrol.models;
 
+import com.mycompany.inventorycontrol.views.ProdutoShowView;
+import com.opencsv.CSVWriter;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProdutoShow {
@@ -89,6 +95,30 @@ public class ProdutoShow {
       e.printStackTrace();
     }
     return produtos;
+  }
+
+  public static void geraRelatorio() throws SQLException {
+    Date now = new Date();
+    String csvFilePath = now + " Relatorio.csv";
+    try{
+    Connection conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao();
+    String sql = "SELECT * FROM produto";
+    Statement statement = conexao.createStatement();
+    ResultSet result = statement.executeQuery(sql);
+    FileWriter fileWriter = new FileWriter(csvFilePath);
+      CSVWriter writer = new CSVWriter(fileWriter,
+              CSVWriter.DEFAULT_SEPARATOR,
+              CSVWriter.NO_QUOTE_CHARACTER,
+              CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+              CSVWriter.DEFAULT_LINE_END);
+
+      boolean includeHeaders = true;
+      writer.writeAll(result, includeHeaders);
+      writer.close();
+
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
   }
 
   public int getId() {
