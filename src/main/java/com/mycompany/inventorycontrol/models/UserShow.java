@@ -15,12 +15,7 @@ public class UserShow {
   private String senha;
   private int nivel_permissao;
 
-  public UserShow(
-    int id,
-    String nome,
-    String senha,
-    int nivel_permissao
-  ) {
+  public UserShow(int id, String nome, String senha, int nivel_permissao) {
     this.id = id;
     this.nome = nome;
     this.senha = senha;
@@ -36,19 +31,14 @@ public class UserShow {
     try {
       conexao = ProdutoAdd.conexaoDAO.getInstancia().getConexao();
       statement = conexao.createStatement();
-      String query = "SELECT * FROM produto";
+      String query = "SELECT * FROM usuario";
       resultSet = statement.executeQuery(query);
       while (resultSet.next()) {
         int id = resultSet.getInt("id");
         String nome = resultSet.getString("nome");
-        String desc = resultSet.getString("senha");
+        String senha = resultSet.getString("senha");
         int nivel_permissao = resultSet.getInt("nivel_permissao");
-        UserShow usuario = new UserShow(
-          id,
-          nome,
-          desc,
-          nivel_permissao          
-        );
+        UserShow usuario = new UserShow(id, nome, senha, nivel_permissao);
         usuarios.add(usuario);
       }
     } catch (SQLException e) {
@@ -70,13 +60,7 @@ public class UserShow {
         String nome = resultSet.getString("nome");
         String desc = resultSet.getString("senha");
         int nivel_permissao = resultSet.getInt("nivel_permissao");
-        UserShow usuario = new UserShow(
-          id,
-          nome,
-          desc,
-          nivel_permissao
-          
-        );
+        UserShow usuario = new UserShow(id, nome, desc, nivel_permissao);
         usuarios.add(usuario);
       }
     } catch (SQLException e) {
@@ -100,5 +84,4 @@ public class UserShow {
   public double getNivel_Permissao() {
     return nivel_permissao;
   }
-
 }

@@ -2,7 +2,8 @@ package com.mycompany.inventorycontrol.views;
 
 import com.mycompany.inventorycontrol.controllers.UserShowController;
 import java.awt.BorderLayout;
-
+import java.awt.Component;
+import java.awt.MediaTracker;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,13 +18,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Component;
-import java.awt.MediaTracker;
 
 public class UserShowView extends JFrame {
 
   private JTable table;
-  private DefaultTableModel tableModel;
+  private static DefaultTableModel tableModel;
   private JTextField searchField;
   private UserShowController UserShowController;
   private JButton addUserButton;
@@ -33,20 +32,21 @@ public class UserShowView extends JFrame {
 
   public UserShowView() {
     initComponents();
-    //UserShowController = new UserShowController(this);
-    //UserShowController.carregarProdutos();
+    UserShowController = new UserShowController(this);
+    UserShowController.carregarUsuarios();
   }
 
   private void initComponents() {
     setTitle("Lista de Usuários");
     setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-    tableModel = new DefaultTableModel() {
-      @Override
-      public boolean isCellEditable(int row, int column) {
-        return false;
-      }
-    };
+    tableModel =
+      new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+          return false;
+        }
+      };
     tableModel.addColumn("ID");
     tableModel.addColumn("Nome");
     tableModel.addColumn("Senha");
@@ -85,7 +85,7 @@ public class UserShowView extends JFrame {
     return table;
   }
 
-  public DefaultTableModel getTableModel() {
+  public static DefaultTableModel getTableModel() {
     return tableModel;
   }
 
