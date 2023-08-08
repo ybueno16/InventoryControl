@@ -13,11 +13,11 @@ public class ProdutoAddController implements ActionListener {
   private ProdutoShowController ProdutoShowController;
 
   public ProdutoAddController(
-    ProdutoAddView view,
-    ProdutoShowController produtoShowController
+          ProdutoAddView view,
+          ProdutoShowController produtoShowController
   ) {
     this.view = view;
-    ProdutoAdd.conexaoDAO dao = ProdutoAdd.conexaoDAO.getInstancia();
+    this.dao = ProdutoAdd.conexaoDAO.getInstancia();
     this.ProdutoShowController = produtoShowController;
     this.view.getButtonAdd().addActionListener(this);
   }
